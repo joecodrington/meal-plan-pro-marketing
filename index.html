@@ -69,6 +69,12 @@
     align-items: center;
   }
 
+  .nav-links .btn-secondary + .btn-primary,
+  .nav-links .btn-primary + .btn-secondary,
+  .nav-links .nav-login + .btn-primary {
+    margin-left: -20px;
+  }
+
   .nav-links a {
     color: var(--ink-soft);
     text-decoration: none;
@@ -681,6 +687,12 @@
     margin-right: auto;
   }
 
+  .cta-microcopy {
+    margin-top: 16px;
+    font-size: 13px;
+    color: var(--grey);
+  }
+
   /* FOOTER */
   footer {
     padding: 64px 48px 32px;
@@ -782,7 +794,8 @@
     <a href="#features">Features</a>
     <a href="pricing.html">Pricing</a>
     <a href="about.html">About</a>
-    <a href="https://meal-plan-frontend-4tsb.onrender.com" class="btn-primary">Start free</a>
+    <a href="https://meal-plan-frontend-4tsb.onrender.com" class="btn-secondary nav-login">Log in</a>
+    <a href="register.html?plan=everyday" class="btn-primary">Start free trial</a>
   </nav>
 </header>
 
@@ -793,8 +806,8 @@
       Personalised meal plans for your whole household. Quick weekday breakfasts, proper weekend cooking, training fuel for whoever's training. One plan, one shopping list, one happy table.
     </p>
     <div class="hero-cta-row">
-      <a href="https://meal-plan-frontend-4tsb.onrender.com" class="btn-primary lg">
-        Generate your first plan
+      <a href="register.html?plan=everyday" class="btn-primary lg">
+        Start free trial
         <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
           <path d="M2 8h12M9 3l5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
@@ -802,8 +815,8 @@
       <a href="how-it-works.html" class="btn-secondary lg">See how it works</a>
     </div>
     <div class="hero-trust">
-      <span>No credit card required</span>
-      <span>Cancel anytime</span>
+      <span>7 days free</span>
+      <span>Cancel anytime before day 8</span>
       <span>Built in the UK</span>
     </div>
   </div>
@@ -1093,12 +1106,13 @@
   <div class="cta-inner">
     <h2>Plan your week. <span class="accent">Eat well.</span></h2>
     <p>Two minutes to set up. One click to generate your first week. Approve, swap, shop. Done.</p>
-    <a href="https://meal-plan-frontend-4tsb.onrender.com" class="btn-primary lg">
-      Create your plan — free
+    <a href="register.html?plan=everyday" class="btn-primary lg">
+      Start your free trial
       <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
         <path d="M2 8h12M9 3l5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
     </a>
+    <div class="cta-microcopy">7 days free · card required · cancel anytime before day 8</div>
   </div>
 </section>
 
