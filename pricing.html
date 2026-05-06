@@ -1,0 +1,1239 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pricing — Meal Plan Pro</title>
+<meta name="description" content="Plans from £4.99/month. Try Everyday free for 7 days. No food guilt — eat well, live well.">
+<meta property="og:title" content="Pricing — Meal Plan Pro">
+<meta property="og:description" content="AI meal plans built for real life. From £4.99/month with a 7-day free trial.">
+<meta property="og:type" content="website">
+<style>
+  :root {
+    --green-primary: #1a8f5a;
+    --green-primary-dark: #15784a;
+    --green-accent: #3da972;
+    --cream: #f4ede4;
+    --cream-deep: #ebe1d2;
+    --white: #ffffff;
+    --ink: #1f1f1f;
+    --ink-soft: #3d3d3d;
+    --grey: #7d7d7d;
+    --grey-light: #b8b3a9;
+    --rule: #e2dccf;
+    --chip-protein: #fdf3d4;
+    --chip-protein-text: #8a6d1a;
+    --chip-carbs: #fde6cf;
+    --chip-carbs-text: #9b561e;
+    --chip-fat: #fdd9d9;
+    --chip-fat-text: #9c3e3e;
+    --chip-omega: #d6f0e0;
+    --chip-omega-text: #2a7a4d;
+    --chip-tag: #e6e1f5;
+    --chip-tag-text: #5b4d8a;
+    --chip-accent: #fde6cf;
+    --chip-accent-text: #9b561e;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    line-height: 1.55;
+    font-size: 16px;
+    overflow-x: hidden;
+  }
+
+  header {
+    border-bottom: 1px solid var(--rule);
+    padding: 22px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    backdrop-filter: blur(8px);
+    background: rgba(244, 237, 228, 0.94);
+  }
+
+  .logo {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .logo span { color: var(--green-accent); }
+
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    align-items: center;
+  }
+
+  .nav-links a {
+    color: var(--ink-soft);
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--green-primary); }
+
+  .nav-links a.active {
+    color: var(--green-primary);
+    font-weight: 600;
+  }
+
+  .btn-primary {
+    background: var(--green-primary);
+    color: var(--white);
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14.5px;
+    font-weight: 600;
+    transition: background 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border: none;
+    cursor: pointer;
+    line-height: 1.3;
+  }
+
+  .btn-primary:hover { background: var(--green-primary-dark); }
+
+  .btn-secondary {
+    background: var(--white);
+    color: var(--ink);
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14.5px;
+    font-weight: 500;
+    transition: border-color 0.2s, color 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid var(--rule);
+    line-height: 1.3;
+  }
+
+  .btn-secondary:hover {
+    border-color: var(--green-primary);
+    color: var(--green-primary);
+  }
+
+  .btn-primary.lg { padding: 14px 24px; font-size: 15px; border-radius: 10px; }
+  .btn-secondary.lg { padding: 14px 24px; font-size: 15px; border-radius: 10px; }
+
+  /* PRICING HERO */
+  .pricing-hero {
+    padding: 80px 48px 56px;
+    max-width: 1280px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .section-eyebrow {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--green-primary);
+    letter-spacing: 0.05em;
+    margin-bottom: 16px;
+    text-transform: uppercase;
+  }
+
+  .pricing-hero h1 {
+    font-size: clamp(40px, 5.5vw, 64px);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: 20px;
+    color: var(--ink);
+  }
+
+  .pricing-hero h1 .accent { color: var(--green-accent); }
+
+  .pricing-hero-lede {
+    font-size: 18px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+    margin: 0 auto 36px;
+    max-width: 620px;
+  }
+
+  /* BILLING TOGGLE */
+  .billing-toggle {
+    display: inline-flex;
+    background: var(--white);
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+    padding: 4px;
+    margin-bottom: 8px;
+  }
+
+  .billing-option {
+    background: transparent;
+    border: none;
+    padding: 10px 22px;
+    font-size: 14.5px;
+    font-weight: 500;
+    color: var(--ink-soft);
+    cursor: pointer;
+    border-radius: 999px;
+    transition: all 0.2s;
+    font-family: inherit;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .billing-option.active {
+    background: var(--green-primary);
+    color: var(--white);
+    font-weight: 600;
+  }
+
+  .billing-option .save-badge {
+    background: var(--chip-omega);
+    color: var(--chip-omega-text);
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 999px;
+    letter-spacing: 0.02em;
+  }
+
+  .billing-option.active .save-badge {
+    background: rgba(255, 255, 255, 0.25);
+    color: var(--white);
+  }
+
+  /* TIERS */
+  .tiers {
+    padding: 0 48px 100px;
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+
+  .tiers-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-bottom: 24px;
+  }
+
+  .tier {
+    background: var(--white);
+    border: 1px solid var(--rule);
+    border-radius: 12px;
+    padding: 36px 32px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+
+  .tier:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px -10px rgba(31, 31, 31, 0.1);
+  }
+
+  .tier.featured {
+    border-color: var(--green-primary);
+    border-width: 2px;
+    box-shadow: 0 12px 32px -12px rgba(26, 143, 90, 0.18);
+  }
+
+  .tier-badge {
+    position: absolute;
+    top: -13px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--green-primary);
+    color: var(--white);
+    font-size: 11.5px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 5px 14px;
+    border-radius: 999px;
+  }
+
+  .tier-name {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-bottom: 8px;
+    color: var(--ink);
+  }
+
+  .tier-tagline {
+    font-size: 14.5px;
+    color: var(--grey);
+    margin-bottom: 28px;
+    line-height: 1.5;
+    min-height: 44px;
+  }
+
+  .tier-price {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+    margin-bottom: 6px;
+  }
+
+  .tier-price-amount {
+    font-size: 48px;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1;
+    color: var(--ink);
+  }
+
+  .tier-price-period {
+    font-size: 15px;
+    color: var(--grey);
+  }
+
+  .tier-price-note {
+    font-size: 13.5px;
+    color: var(--grey);
+    margin-bottom: 28px;
+    min-height: 20px;
+  }
+
+  .tier-price-note .accent { color: var(--green-primary); font-weight: 600; }
+
+  .tier-features {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 32px;
+    flex-grow: 1;
+  }
+
+  .tier-features li {
+    position: relative;
+    padding: 11px 0 11px 26px;
+    font-size: 14.5px;
+    line-height: 1.5;
+    color: var(--ink-soft);
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .tier-features li:last-child {
+    border-bottom: none;
+  }
+
+  .tier-features li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    top: 11px;
+    color: var(--green-primary);
+    font-weight: 700;
+  }
+
+  .tier-features li strong {
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  .tier-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    text-align: center;
+    padding: 14px 22px;
+    border-radius: 10px;
+    font-size: 14.5px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s;
+    cursor: pointer;
+    line-height: 1.3;
+  }
+
+  .tier-cta.primary {
+    background: var(--green-primary);
+    color: var(--white);
+    border: none;
+  }
+
+  .tier-cta.primary:hover {
+    background: var(--green-primary-dark);
+  }
+
+  .tier-cta.outline {
+    background: var(--white);
+    color: var(--ink);
+    border: 1px solid var(--rule);
+  }
+
+  .tier-cta.outline:hover {
+    border-color: var(--green-primary);
+    color: var(--green-primary);
+  }
+
+  .tier-cta-sub {
+    display: block;
+    margin-top: 12px;
+    font-size: 12.5px;
+    color: var(--grey);
+    text-align: center;
+  }
+
+  /* RACE READY ADD-ON */
+  .addon {
+    padding: 0 48px 100px;
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+
+  .addon-card {
+    background: var(--white);
+    border: 1px solid var(--rule);
+    border-radius: 12px;
+    padding: 48px;
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 56px;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .addon-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: var(--chip-accent-text);
+  }
+
+  .addon-eyebrow {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--chip-accent-text);
+    letter-spacing: 0.05em;
+    margin-bottom: 14px;
+    text-transform: uppercase;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .addon h2 {
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    margin-bottom: 16px;
+    color: var(--ink);
+  }
+
+  .addon-intro p {
+    color: var(--ink-soft);
+    margin-bottom: 24px;
+    font-size: 15.5px;
+    line-height: 1.6;
+  }
+
+  .addon-pricing {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 16px;
+  }
+
+  .addon-price-main {
+    font-size: 17px;
+    color: var(--ink);
+  }
+
+  .addon-price-main strong {
+    font-size: 22px;
+    color: var(--green-primary);
+    font-weight: 700;
+  }
+
+  .addon-price-alt {
+    font-size: 14.5px;
+    color: var(--grey);
+  }
+
+  .addon-included {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--chip-omega-text);
+    background: var(--chip-omega);
+    padding: 6px 12px;
+    border-radius: 999px;
+    font-weight: 500;
+    align-self: flex-start;
+  }
+
+  .addon-features {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 28px;
+  }
+
+  .addon-features li {
+    padding: 10px 0 10px 28px;
+    position: relative;
+    font-size: 14.5px;
+    color: var(--ink-soft);
+    line-height: 1.5;
+  }
+
+  .addon-features li::before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    top: 10px;
+    color: var(--chip-accent-text);
+    font-weight: 700;
+  }
+
+  .addon-ctas {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  /* TRUST STRIP */
+  .trust-strip {
+    background: var(--white);
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    padding: 32px 48px;
+  }
+
+  .trust-strip-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 32px;
+  }
+
+  .trust-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 14px;
+    color: var(--ink-soft);
+  }
+
+  .trust-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--chip-omega);
+    color: var(--chip-omega-text);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .trust-item strong {
+    display: block;
+    color: var(--ink);
+    font-weight: 600;
+    margin-bottom: 2px;
+  }
+
+  .trust-item span {
+    font-size: 13px;
+    color: var(--grey);
+  }
+
+  /* WHY SECTION */
+  .why {
+    padding: 100px 48px;
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+
+  .why h2 {
+    font-size: clamp(32px, 4vw, 48px);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 20px;
+    max-width: 720px;
+    color: var(--ink);
+  }
+
+  .section-lede {
+    font-size: 18px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+    margin-bottom: 56px;
+    max-width: 640px;
+  }
+
+  .why-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .why-card {
+    background: var(--white);
+    border: 1px solid var(--rule);
+    border-radius: 12px;
+    padding: 28px;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+
+  .why-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px -10px rgba(31, 31, 31, 0.1);
+  }
+
+  .why-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: var(--cream);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    margin-bottom: 18px;
+  }
+
+  .why-card h3 {
+    font-size: 17px;
+    font-weight: 600;
+    line-height: 1.3;
+    margin-bottom: 10px;
+    color: var(--ink);
+  }
+
+  .why-card p {
+    font-size: 14.5px;
+    line-height: 1.6;
+    color: var(--ink-soft);
+  }
+
+  /* FAQ — matches index.html style */
+  .faq {
+    padding: 100px 48px;
+    max-width: 880px;
+    margin: 0 auto;
+    background: var(--white);
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .faq-wrapper {
+    background: var(--white);
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .faq-inner {
+    padding: 100px 48px;
+    max-width: 880px;
+    margin: 0 auto;
+  }
+
+  .faq-inner h2 {
+    font-size: clamp(32px, 4vw, 48px);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 20px;
+    color: var(--ink);
+  }
+
+  .faq-list {
+    margin-top: 48px;
+  }
+
+  .faq-item {
+    border-bottom: 1px solid var(--rule);
+    padding: 20px 0;
+    cursor: pointer;
+  }
+
+  .faq-q {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 24px;
+    font-size: 17px;
+    font-weight: 600;
+    line-height: 1.3;
+    color: var(--ink);
+  }
+
+  .faq-q-toggle {
+    color: var(--green-primary);
+    font-size: 22px;
+    flex-shrink: 0;
+    transition: transform 0.2s;
+    line-height: 1;
+    margin-top: 2px;
+  }
+
+  .faq-item.open .faq-q-toggle { transform: rotate(45deg); }
+
+  .faq-a {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+    font-size: 15px;
+    line-height: 1.65;
+    color: var(--ink-soft);
+  }
+
+  .faq-item.open .faq-a {
+    max-height: 400px;
+    padding-top: 14px;
+  }
+
+  /* CTA — matches index.html style */
+  .cta {
+    padding: 100px 48px;
+    text-align: center;
+  }
+
+  .cta-inner {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .cta h2 {
+    font-size: clamp(36px, 4.5vw, 56px);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: 20px;
+    color: var(--ink);
+  }
+
+  .cta h2 .accent { color: var(--green-accent); }
+
+  .cta p {
+    font-size: 18px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+    margin-bottom: 32px;
+    max-width: 540px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .cta-alt {
+    margin-top: 18px;
+    font-size: 14.5px;
+    color: var(--grey);
+  }
+
+  .cta-alt a {
+    color: var(--green-primary);
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  .cta-alt a:hover { text-decoration: underline; }
+
+  /* FOOTER */
+  footer {
+    padding: 64px 48px 32px;
+    background: var(--cream);
+    border-top: 1px solid var(--rule);
+  }
+
+  .footer-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 48px;
+    margin-bottom: 48px;
+  }
+
+  .footer-brand {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-bottom: 12px;
+  }
+  .footer-brand span { color: var(--green-accent); }
+
+  .footer-tagline {
+    font-size: 15px;
+    color: var(--grey);
+    max-width: 280px;
+    line-height: 1.5;
+  }
+
+  .footer-col h5 {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 16px;
+    letter-spacing: 0.02em;
+  }
+
+  .footer-col a {
+    display: block;
+    color: var(--ink-soft);
+    text-decoration: none;
+    font-size: 14.5px;
+    padding: 5px 0;
+    transition: color 0.2s;
+  }
+
+  .footer-col a:hover { color: var(--green-primary); }
+
+  .footer-bottom {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding-top: 24px;
+    border-top: 1px solid var(--rule);
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    font-size: 13px;
+    color: var(--grey);
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    header { padding: 16px 24px; }
+    .nav-links { gap: 12px; }
+    .nav-links a:not(.btn-primary) { display: none; }
+
+    .pricing-hero { padding: 56px 24px 40px; }
+    .tiers { padding: 0 24px 64px; }
+    .tiers-grid { grid-template-columns: 1fr; gap: 16px; }
+    .tier.featured { order: -1; }
+
+    .addon { padding: 0 24px 64px; }
+    .addon-card {
+      grid-template-columns: 1fr;
+      gap: 32px;
+      padding: 32px 24px;
+    }
+    .addon h2 { font-size: 26px; }
+
+    .trust-strip { padding: 24px; }
+    .trust-strip-inner { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+
+    .why { padding: 64px 24px; }
+    .why-grid { grid-template-columns: 1fr; gap: 16px; }
+
+    .faq-inner { padding: 64px 24px; }
+    .cta { padding: 64px 24px; }
+
+    .footer-inner { grid-template-columns: 1fr 1fr; gap: 32px; }
+    footer { padding: 48px 24px 32px; }
+  }
+
+  @media (max-width: 500px) {
+    .footer-inner { grid-template-columns: 1fr; }
+    .trust-strip-inner { grid-template-columns: 1fr; }
+    .billing-toggle { width: 100%; }
+    .billing-option { flex: 1; justify-content: center; padding: 10px 12px; font-size: 13.5px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <a href="index.html" class="logo">Meal Plan <span>Pro</span></a>
+  <nav class="nav-links">
+    <a href="index.html#problem">Why us</a>
+    <a href="how-it-works.html">How it works</a>
+    <a href="index.html#features">Features</a>
+    <a href="pricing.html" class="active">Pricing</a>
+    <a href="about.html">About</a>
+    <a href="https://meal-plan-frontend-4tsb.onrender.com" class="btn-primary">Start free</a>
+  </nav>
+</header>
+
+<section class="pricing-hero">
+  <div class="section-eyebrow">Pricing</div>
+  <h1>Eat well. <span class="accent">Live well.</span><br>No food guilt.</h1>
+  <p class="pricing-hero-lede">
+    Plans built for real life — quick weekday breakfasts, leisurely weekends, and the occasional Friday night curry. Pick a tier that suits your household.
+  </p>
+
+  <div class="billing-toggle" role="group" aria-label="Billing period">
+    <button class="billing-option active" data-billing="monthly" type="button">Monthly</button>
+    <button class="billing-option" data-billing="annual" type="button">
+      Annual
+      <span class="save-badge">Save 17%</span>
+    </button>
+  </div>
+</section>
+
+<section class="tiers">
+  <div class="tiers-grid">
+
+    <!-- TASTER -->
+    <article class="tier" id="taster">
+      <h2 class="tier-name">Taster</h2>
+      <p class="tier-tagline">Try AI meal planning without the commitment.</p>
+
+      <div class="tier-price">
+        <span class="tier-price-amount" data-price-monthly="£4.99" data-price-annual="£4.99">£4.99</span>
+        <span class="tier-price-period" data-period-monthly="/month" data-period-annual="/month">/month</span>
+      </div>
+      <p class="tier-price-note" data-note-monthly="Monthly only" data-note-annual="Monthly only">Monthly only</p>
+
+      <ul class="tier-features">
+        <li><strong>2 meal plans</strong> per month</li>
+        <li>Up to <strong>3-day plans</strong></li>
+        <li>Single adult profile</li>
+        <li>Unlimited meal swaps</li>
+        <li>Smart shopping list</li>
+        <li>Eating-out day budgeting</li>
+      </ul>
+
+      <a href="https://meal-plan-frontend-4tsb.onrender.com?plan=taster" class="tier-cta outline" data-cta="tier-taster">
+        Start with Taster
+      </a>
+    </article>
+
+    <!-- EVERYDAY (FEATURED) -->
+    <article class="tier featured" id="everyday">
+      <span class="tier-badge">Most Popular</span>
+      <h2 class="tier-name">Everyday</h2>
+      <p class="tier-tagline">For couples and individuals who cook most nights — but still enjoy life.</p>
+
+      <div class="tier-price">
+        <span class="tier-price-amount" data-price-monthly="£9.99" data-price-annual="£8.25">£9.99</span>
+        <span class="tier-price-period" data-period-monthly="/month" data-period-annual="/month">/month</span>
+      </div>
+      <p class="tier-price-note" data-note-monthly="or £99/year — save £20" data-note-annual="Billed £99/year — save £20">
+        or £99/year — <span class="accent">save £20</span>
+      </p>
+
+      <ul class="tier-features">
+        <li><strong>6 meal plans</strong> per month</li>
+        <li>Up to <strong>7-day plans</strong></li>
+        <li><strong>Add a partner</strong> with their own targets</li>
+        <li><strong>Sports profile</strong> — training day periodisation</li>
+        <li>Recipe instructions for every meal</li>
+        <li>Save favourite meals</li>
+        <li>Quick weekdays, leisurely weekends</li>
+      </ul>
+
+      <a href="https://meal-plan-frontend-4tsb.onrender.com?plan=everyday-trial" class="tier-cta primary" data-cta="tier-everyday">
+        Start 7-day free trial
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+          <path d="M2 8h12M9 3l5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+      <span class="tier-cta-sub">No card charged until day 8</span>
+    </article>
+
+    <!-- FAMILY -->
+    <article class="tier" id="family">
+      <h2 class="tier-name">Family</h2>
+      <p class="tier-tagline">For households juggling kids' meals, adult goals, and busy weeks.</p>
+
+      <div class="tier-price">
+        <span class="tier-price-amount" data-price-monthly="£14.99" data-price-annual="£12.42">£14.99</span>
+        <span class="tier-price-period" data-period-monthly="/month" data-period-annual="/month">/month</span>
+      </div>
+      <p class="tier-price-note" data-note-monthly="or £149/year — save £30" data-note-annual="Billed £149/year — save £30">
+        or £149/year — <span class="accent">save £30</span>
+      </p>
+
+      <ul class="tier-features">
+        <li><strong>12 meal plans</strong> per month</li>
+        <li>Up to <strong>14-day plans</strong></li>
+        <li><strong>Up to 6 children</strong> with portion scaling</li>
+        <li><strong>Sports profiles for both adults</strong></li>
+        <li><strong>Race Ready included</strong></li>
+        <li>Same / separate / mixed meal modes</li>
+        <li>School lunch handling</li>
+      </ul>
+
+      <a href="https://meal-plan-frontend-4tsb.onrender.com?plan=family" class="tier-cta outline" data-cta="tier-family">
+        Choose Family
+      </a>
+    </article>
+
+  </div>
+</section>
+
+<section class="addon" id="race-ready">
+  <div class="addon-card">
+    <div class="addon-intro">
+      <div class="addon-eyebrow">🏃 Add-on</div>
+      <h2>Race Ready</h2>
+      <p>
+        Whether it's your first 10K or your fifth marathon, Race Ready handles the nutrition science so you can focus on the miles.
+      </p>
+      <div class="addon-pricing">
+        <div class="addon-price-main"><strong>£4.99/month</strong> as an Everyday add-on</div>
+        <div class="addon-price-alt">or £9.99 for an 8-week race block</div>
+      </div>
+      <span class="addon-included">✓ Included free with Family</span>
+    </div>
+
+    <div class="addon-details">
+      <ul class="addon-features">
+        <li>Carb loading protocols (3-day, 6-day, modified, classical)</li>
+        <li>Day-by-day race week plan</li>
+        <li>Race morning meal optimisation</li>
+        <li>Long training day fuelling</li>
+        <li>GI-sensitive options</li>
+      </ul>
+      <div class="addon-ctas">
+        <a href="https://meal-plan-frontend-4tsb.onrender.com?addon=race-ready-monthly" class="btn-primary lg" data-cta="raceready-monthly">
+          Add Race Ready
+        </a>
+        <a href="https://meal-plan-frontend-4tsb.onrender.com?addon=race-ready-block" class="btn-secondary lg" data-cta="raceready-block">
+          Buy 8-week block
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="trust-strip">
+  <div class="trust-strip-inner">
+    <div class="trust-item">
+      <div class="trust-icon">✓</div>
+      <div>
+        <strong>Cancel anytime</strong>
+        <span>No contracts, no questions</span>
+      </div>
+    </div>
+    <div class="trust-item">
+      <div class="trust-icon">✓</div>
+      <div>
+        <strong>Secure payment</strong>
+        <span>Stripe encrypted checkout</span>
+      </div>
+    </div>
+    <div class="trust-item">
+      <div class="trust-icon">✓</div>
+      <div>
+        <strong>Works everywhere</strong>
+        <span>Phone, tablet, laptop</span>
+      </div>
+    </div>
+    <div class="trust-item">
+      <div class="trust-icon">✓</div>
+      <div>
+        <strong>UK supermarkets</strong>
+        <span>Ocado, Tesco, Sainsbury's, Waitrose</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="why">
+  <div class="section-eyebrow">Why we're different</div>
+  <h2>We don't believe in food guilt.</h2>
+  <p class="section-lede">
+    Most meal plans treat eating out like cheating. They give you Monday-morning omelettes that take 25 minutes to cook. They forget you have kids, a partner, a Saturday morning lie-in. We don't.
+  </p>
+
+  <div class="why-grid">
+    <div class="why-card">
+      <div class="why-icon">🥐</div>
+      <h3>Realistic weekdays</h3>
+      <p>Overnight oats and smoothies on busy mornings — not chef-grade breakfasts that take 25 minutes to cook.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">🍳</div>
+      <h3>Leisurely weekends</h3>
+      <p>Proper cooked breakfasts when you've actually got time to enjoy them. Pancakes, shakshuka, the works.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">🍝</div>
+      <h3>Eating out tonight?</h3>
+      <p>Other meals automatically lighten so your week stays balanced. No dinner planned, no shopping for one.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">👫</div>
+      <h3>Couples eat differently</h3>
+      <p>Your partner picks their own meals per day, independently. One of you on three meals, the other on five.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">🏃</div>
+      <h3>Training matters</h3>
+      <p>Higher carbs on training days, recovery meals timed properly. Pre-workout, post-workout, all sorted.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">👨‍👩‍👧</div>
+      <h3>Whole household</h3>
+      <p>Up to six children with age-based portion scaling. Shared meals, separate meals, or mixed.</p>
+    </div>
+  </div>
+</section>
+
+<div class="faq-wrapper">
+  <div class="faq-inner">
+    <div class="section-eyebrow">Common questions</div>
+    <h2>Things people ask about pricing.</h2>
+
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-q">
+          <span>What counts as a "meal plan"?</span>
+          <span class="faq-q-toggle">+</span>
+        </div>
+        <div class="faq-a">A meal plan is one full plan generation for your chosen number of days (3, 5, 7, or 14 days). Swapping individual meals doesn't count toward your monthly limit — swap as much as you want until you're happy with what's on the menu.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">
+          <span>Can I change tiers anytime?</span>
+          <span class="faq-q-toggle">+</span>
+        </div>
+        <div class="faq-a">Yes. Upgrade instantly when you need more. Downgrade at the end of your billing cycle. No fees either way, no retention calls, no hoops to jump through.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">
+          <span>What happens after my free trial?</span>
+          <span class="faq-q-toggle">+</span>
+        </div>
+        <div class="faq-a">On day 8, you'll be charged £9.99 and continue on Everyday. Cancel anytime before day 7 and you won't be charged a penny. We'll send you a reminder on day 5 so you've got time to decide.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">
+          <span>Do I need an Ocado or Tesco account?</span>
+          <span class="faq-q-toggle">+</span>
+        </div>
+        <div class="faq-a">No. We generate smart search links to Ocado, Tesco, Sainsbury's and Waitrose — use whichever you prefer. Works without any supermarket login required.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">
+          <span>Is my data private?</span>
+          <span class="faq-q-toggle">+</span>
+        </div>
+        <div class="faq-a">Your data is stored securely in EU-region servers (Supabase, EU West) and never shared. We don't sell data, we don't run third-party ad trackers. Cancel and your data is deleted within 30 days.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">
+          <span>Why is Race Ready a separate add-on?</span>
+          <span class="faq-q-toggle">+</span>
+        </div>
+        <div class="faq-a">Carb loading and race-week planning are specialist features most users only need a few months a year — when they're training for an event. Pricing it as an add-on (or one-off 8-week block) means non-runners don't pay for features they don't use, and runners can drop it after race day.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">
+          <span>Can I really cancel anytime?</span>
+          <span class="faq-q-toggle">+</span>
+        </div>
+        <div class="faq-a">Yes — one click in your account settings. No retention calls, no "but wait" pop-ups, no hoops. Your subscription ends at the close of your current billing period.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="cta">
+  <div class="cta-inner">
+    <h2>Ready to plan your week? <span class="accent">Eat well.</span></h2>
+    <p>Start your 7-day free trial of Everyday. No card charged until day 8. Cancel anytime.</p>
+    <a href="https://meal-plan-frontend-4tsb.onrender.com?plan=everyday-trial" class="btn-primary lg" data-cta="final-trial">
+      Start your 7-day free trial
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+        <path d="M2 8h12M9 3l5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </a>
+    <p class="cta-alt">
+      Just want a taste? <a href="https://meal-plan-frontend-4tsb.onrender.com?plan=taster">Try Taster for £4.99</a> instead.
+    </p>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand">Meal Plan <span>Pro</span></div>
+      <div class="footer-tagline">Plan your week, shop smart, eat well.</div>
+    </div>
+    <div class="footer-col">
+      <h5>Product</h5>
+      <a href="how-it-works.html">How it works</a>
+      <a href="index.html#features">Features</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="pricing.html#race-ready">Race Ready</a>
+    </div>
+    <div class="footer-col">
+      <h5>Company</h5>
+      <a href="about.html">About</a>
+      <a href="#">Contact</a>
+    </div>
+    <div class="footer-col">
+      <h5>Legal</h5>
+      <a href="#">Privacy</a>
+      <a href="#">Terms</a>
+      <a href="#">Cookies</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div>© 2026 Meal Plan Pro · Made in the UK</div>
+    <div>v2.0</div>
+  </div>
+</footer>
+
+<script>
+  // FAQ accordion (matches index.html behaviour)
+  document.querySelectorAll('.faq-item').forEach(item => {
+    item.addEventListener('click', () => {
+      const wasOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!wasOpen) item.classList.add('open');
+    });
+  });
+
+  // Billing toggle — swaps prices between monthly and annual
+  const billingButtons = document.querySelectorAll('.billing-option');
+  billingButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const billing = btn.dataset.billing;
+
+      // Update active state
+      billingButtons.forEach(b => b.classList.toggle('active', b === btn));
+
+      // Swap displayed prices, periods and notes for each tier
+      document.querySelectorAll('.tier-price-amount').forEach(el => {
+        el.textContent = el.dataset[`price${billing.charAt(0).toUpperCase() + billing.slice(1)}`];
+      });
+      document.querySelectorAll('.tier-price-period').forEach(el => {
+        el.textContent = el.dataset[`period${billing.charAt(0).toUpperCase() + billing.slice(1)}`];
+      });
+      document.querySelectorAll('.tier-price-note').forEach(el => {
+        const noteText = el.dataset[`note${billing.charAt(0).toUpperCase() + billing.slice(1)}`];
+        // Preserve "save" accent styling for Everyday and Family
+        if (noteText.includes('save')) {
+          el.innerHTML = noteText.replace(/save (£\d+)/, 'save <span class="accent">$1</span>');
+        } else {
+          el.textContent = noteText;
+        }
+      });
+    });
+  });
+</script>
+
+</body>
+</html>
