@@ -1,1 +1,722 @@
+/*
+  ============================================================
+  MEAL PLAN PRO - PRICING PAGE STYLES
+  ============================================================
+  All styles are scoped under .mpp-pricing namespace.
+  Safe to drop alongside any existing site stylesheet.
 
+  Customise the brand colours by overriding the CSS variables
+  at the top of the .mpp-pricing block.
+  ============================================================
+*/
+
+block into your site <head> (or
+       extract to a separate stylesheet).
+    2. Paste the <section class="mpp-pricing"> block wherever
+       you want the pricing to appear.
+    3. Update the data-cta attributes to point to your
+       checkout / signup URLs.
+    4. Test responsive breakpoints at 768px and 480px.
+
+  COLOURS:    Sage green (#5C7A55) + warm cream (#FAF6EF)
+  FONT STACK: Uses system fonts. Replace with your brand
+              fonts if needed (search "FONT_FAMILY").
+  ============================================================
+-->
+
+<style>
+/* ============ SCOPED STYLES — .mpp-pricing namespace ============ */
+.mpp-pricing {
+  --mpp-sage: #5C7A55;
+  --mpp-sage-dark: #3F5639;
+  --mpp-cream: #FAF6EF;
+  --mpp-cream-dark: #F0E9DB;
+  --mpp-charcoal: #2A2A2A;
+  --mpp-muted: #6B6B6B;
+  --mpp-accent: #E8825C;
+  --mpp-border: #E5DFD2;
+  --mpp-shadow: 0 4px 20px rgba(42, 42, 42, 0.06);
+  --mpp-shadow-hover: 0 12px 40px rgba(42, 42, 42, 0.12);
+  --mpp-radius: 16px;
+
+  /* FONT_FAMILY — replace with your site's brand fonts */
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  color: var(--mpp-charcoal);
+  background: var(--mpp-cream);
+  padding: 80px 24px;
+  line-height: 1.5;
+}
+
+.mpp-pricing *,
+.mpp-pricing *::before,
+.mpp-pricing *::after {
+  box-sizing: border-box;
+}
+
+.mpp-pricing__container {
+  max-width: 1180px;
+  margin: 0 auto;
+}
+
+/* ============ HERO ============ */
+.mpp-hero {
+  text-align: center;
+  margin-bottom: 64px;
+}
+
+.mpp-hero__title {
+  font-size: clamp(2.2rem, 5vw, 3.8rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  margin: 0 0 20px;
+  color: var(--mpp-charcoal);
+}
+
+.mpp-hero__subtitle {
+  font-size: clamp(1.05rem, 2vw, 1.25rem);
+  color: var(--mpp-muted);
+  max-width: 680px;
+  margin: 0 auto 32px;
+  font-weight: 400;
+}
+
+.mpp-hero__cta {
+  display: inline-block;
+  background: var(--mpp-sage);
+  color: var(--mpp-cream);
+  padding: 18px 36px;
+  border-radius: 999px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  border: none;
+  cursor: pointer;
+  letter-spacing: 0.01em;
+}
+
+.mpp-hero__cta:hover {
+  background: var(--mpp-sage-dark);
+  transform: translateY(-2px);
+  box-shadow: var(--mpp-shadow-hover);
+}
+
+.mpp-hero__microcopy {
+  display: block;
+  margin-top: 14px;
+  font-size: 0.875rem;
+  color: var(--mpp-muted);
+}
+
+/* ============ BILLING TOGGLE ============ */
+.mpp-toggle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 48px;
+}
+
+.mpp-toggle__label {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--mpp-muted);
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.mpp-toggle__label--active {
+  color: var(--mpp-charcoal);
+}
+
+.mpp-toggle__switch {
+  position: relative;
+  width: 52px;
+  height: 28px;
+  background: var(--mpp-cream-dark);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  border: 1px solid var(--mpp-border);
+}
+
+.mpp-toggle__switch::after {
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 20px;
+  height: 20px;
+  background: white;
+  border-radius: 50%;
+  transition: transform 0.2s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+}
+
+.mpp-toggle__switch[data-active="annual"] {
+  background: var(--mpp-sage);
+  border-color: var(--mpp-sage);
+}
+
+.mpp-toggle__switch[data-active="annual"]::after {
+  transform: translateX(24px);
+}
+
+.mpp-toggle__badge {
+  display: inline-block;
+  background: var(--mpp-accent);
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 999px;
+  margin-left: 6px;
+}
+
+/* ============ TIER GRID ============ */
+.mpp-tiers {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-bottom: 80px;
+}
+
+.mpp-tier {
+  background: white;
+  border: 1px solid var(--mpp-border);
+  border-radius: var(--mpp-radius);
+  padding: 36px 32px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.mpp-tier:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--mpp-shadow-hover);
+}
+
+.mpp-tier--featured {
+  background: var(--mpp-sage);
+  color: var(--mpp-cream);
+  border-color: var(--mpp-sage);
+  transform: scale(1.03);
+  box-shadow: var(--mpp-shadow);
+}
+
+.mpp-tier--featured:hover {
+  transform: scale(1.03) translateY(-4px);
+}
+
+.mpp-tier__badge {
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--mpp-accent);
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 6px 16px;
+  border-radius: 999px;
+}
+
+.mpp-tier__name {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0 0 8px;
+  letter-spacing: -0.01em;
+}
+
+.mpp-tier__tagline {
+  font-size: 0.95rem;
+  color: var(--mpp-muted);
+  margin: 0 0 24px;
+  min-height: 44px;
+}
+
+.mpp-tier--featured .mpp-tier__tagline {
+  color: rgba(250, 246, 239, 0.8);
+}
+
+.mpp-tier__price {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  margin-bottom: 6px;
+}
+
+.mpp-tier__price-amount {
+  font-size: 3rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+
+.mpp-tier__price-period {
+  font-size: 1rem;
+  color: var(--mpp-muted);
+}
+
+.mpp-tier--featured .mpp-tier__price-period {
+  color: rgba(250, 246, 239, 0.8);
+}
+
+.mpp-tier__price-note {
+  font-size: 0.875rem;
+  color: var(--mpp-muted);
+  margin-bottom: 28px;
+  min-height: 22px;
+}
+
+.mpp-tier--featured .mpp-tier__price-note {
+  color: rgba(250, 246, 239, 0.8);
+}
+
+.mpp-tier__features {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 32px;
+  flex-grow: 1;
+}
+
+.mpp-tier__features li {
+  position: relative;
+  padding: 10px 0 10px 28px;
+  font-size: 0.95rem;
+  border-bottom: 1px solid var(--mpp-border);
+}
+
+.mpp-tier--featured .mpp-tier__features li {
+  border-bottom-color: rgba(250, 246, 239, 0.15);
+}
+
+.mpp-tier__features li:last-child {
+  border-bottom: none;
+}
+
+.mpp-tier__features li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  top: 10px;
+  color: var(--mpp-sage);
+  font-weight: 700;
+}
+
+.mpp-tier--featured .mpp-tier__features li::before {
+  color: var(--mpp-cream);
+}
+
+.mpp-tier__features li strong {
+  font-weight: 600;
+}
+
+.mpp-tier__cta {
+  display: block;
+  text-align: center;
+  padding: 16px 24px;
+  border-radius: 999px;
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  border: 2px solid var(--mpp-charcoal);
+  color: var(--mpp-charcoal);
+  background: transparent;
+  cursor: pointer;
+}
+
+.mpp-tier__cta:hover {
+  background: var(--mpp-charcoal);
+  color: var(--mpp-cream);
+}
+
+.mpp-tier--featured .mpp-tier__cta {
+  background: var(--mpp-cream);
+  color: var(--mpp-sage-dark);
+  border-color: var(--mpp-cream);
+}
+
+.mpp-tier--featured .mpp-tier__cta:hover {
+  background: white;
+  border-color: white;
+  transform: translateY(-1px);
+}
+
+.mpp-tier__cta-sub {
+  display: block;
+  margin-top: 10px;
+  font-size: 0.8rem;
+  color: var(--mpp-muted);
+  text-align: center;
+}
+
+.mpp-tier--featured .mpp-tier__cta-sub {
+  color: rgba(250, 246, 239, 0.75);
+}
+
+/* ============ ADD-ON SECTION ============ */
+.mpp-addon {
+  background: white;
+  border: 1px solid var(--mpp-border);
+  border-radius: var(--mpp-radius);
+  padding: 48px 40px;
+  margin-bottom: 80px;
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 48px;
+  align-items: center;
+}
+
+.mpp-addon__intro h3 {
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--mpp-accent);
+  margin: 0 0 12px;
+}
+
+.mpp-addon__intro h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin: 0 0 16px;
+}
+
+.mpp-addon__intro p {
+  color: var(--mpp-muted);
+  margin: 0 0 24px;
+  font-size: 1rem;
+}
+
+.mpp-addon__price {
+  font-size: 1.1rem;
+  margin-bottom: 6px;
+}
+
+.mpp-addon__price strong {
+  font-size: 1.4rem;
+  color: var(--mpp-sage);
+}
+
+.mpp-addon__price-alt {
+  font-size: 0.95rem;
+  color: var(--mpp-muted);
+  margin-bottom: 24px;
+}
+
+.mpp-addon__included {
+  font-size: 0.85rem;
+  font-style: italic;
+  color: var(--mpp-muted);
+  margin-top: 16px;
+}
+
+.mpp-addon__features {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 24px;
+}
+
+.mpp-addon__features li {
+  padding: 8px 0 8px 28px;
+  position: relative;
+  font-size: 0.95rem;
+}
+
+.mpp-addon__features li::before {
+  content: "→";
+  position: absolute;
+  left: 0;
+  color: var(--mpp-accent);
+  font-weight: 700;
+}
+
+.mpp-addon__ctas {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.mpp-addon__cta {
+  padding: 14px 28px;
+  border-radius: 999px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s ease;
+}
+
+.mpp-addon__cta--primary {
+  background: var(--mpp-accent);
+  color: white;
+}
+
+.mpp-addon__cta--primary:hover {
+  background: #D06B45;
+  transform: translateY(-1px);
+}
+
+.mpp-addon__cta--secondary {
+  background: transparent;
+  color: var(--mpp-charcoal);
+  border: 2px solid var(--mpp-border);
+}
+
+.mpp-addon__cta--secondary:hover {
+  border-color: var(--mpp-charcoal);
+}
+
+/* ============ TRUST STRIP ============ */
+.mpp-trust {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  padding: 32px;
+  background: white;
+  border-radius: var(--mpp-radius);
+  border: 1px solid var(--mpp-border);
+  margin-bottom: 80px;
+  text-align: center;
+}
+
+.mpp-trust__item {
+  font-size: 0.9rem;
+  color: var(--mpp-charcoal);
+}
+
+.mpp-trust__item strong {
+  display: block;
+  font-size: 1rem;
+  margin-bottom: 4px;
+}
+
+.mpp-trust__item span {
+  color: var(--mpp-muted);
+  font-size: 0.85rem;
+}
+
+/* ============ "WHY" SECTION ============ */
+.mpp-why {
+  text-align: center;
+  margin-bottom: 80px;
+}
+
+.mpp-why__title {
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin: 0 0 16px;
+}
+
+.mpp-why__intro {
+  max-width: 640px;
+  margin: 0 auto 48px;
+  color: var(--mpp-muted);
+  font-size: 1.05rem;
+}
+
+.mpp-why__intro strong {
+  display: block;
+  margin-top: 12px;
+  color: var(--mpp-sage-dark);
+  font-size: 1.15rem;
+}
+
+.mpp-why__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 24px;
+  text-align: left;
+}
+
+.mpp-why__item {
+  background: white;
+  padding: 24px;
+  border-radius: var(--mpp-radius);
+  border: 1px solid var(--mpp-border);
+}
+
+.mpp-why__item-icon {
+  font-size: 1.6rem;
+  margin-bottom: 12px;
+  display: block;
+}
+
+.mpp-why__item h4 {
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin: 0 0 8px;
+}
+
+.mpp-why__item p {
+  font-size: 0.9rem;
+  color: var(--mpp-muted);
+  margin: 0;
+}
+
+/* ============ FAQ ============ */
+.mpp-faq {
+  max-width: 760px;
+  margin: 0 auto 80px;
+}
+
+.mpp-faq__title {
+  text-align: center;
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin: 0 0 40px;
+}
+
+.mpp-faq__item {
+  background: white;
+  border: 1px solid var(--mpp-border);
+  border-radius: 12px;
+  margin-bottom: 12px;
+  overflow: hidden;
+}
+
+.mpp-faq__item summary {
+  padding: 20px 24px;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 1rem;
+  list-style: none;
+  position: relative;
+  padding-right: 56px;
+}
+
+.mpp-faq__item summary::-webkit-details-marker {
+  display: none;
+}
+
+.mpp-faq__item summary::after {
+  content: "+";
+  position: absolute;
+  right: 24px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.4rem;
+  color: var(--mpp-sage);
+  transition: transform 0.2s ease;
+}
+
+.mpp-faq__item[open] summary::after {
+  transform: translateY(-50%) rotate(45deg);
+}
+
+.mpp-faq__item-content {
+  padding: 0 24px 20px;
+  color: var(--mpp-muted);
+  font-size: 0.95rem;
+}
+
+/* ============ FINAL CTA ============ */
+.mpp-final {
+  background: var(--mpp-charcoal);
+  color: var(--mpp-cream);
+  border-radius: var(--mpp-radius);
+  padding: 64px 32px;
+  text-align: center;
+}
+
+.mpp-final h2 {
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin: 0 0 32px;
+  max-width: 580px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.mpp-final__cta {
+  display: inline-block;
+  background: var(--mpp-cream);
+  color: var(--mpp-charcoal);
+  padding: 18px 40px;
+  border-radius: 999px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.mpp-final__cta:hover {
+  background: white;
+  transform: translateY(-2px);
+}
+
+.mpp-final__sub {
+  margin-top: 16px;
+  font-size: 0.875rem;
+  color: rgba(250, 246, 239, 0.7);
+}
+
+.mpp-final__alt {
+  margin-top: 24px;
+  font-size: 0.95rem;
+  color: rgba(250, 246, 239, 0.8);
+}
+
+.mpp-final__alt a {
+  color: var(--mpp-cream);
+  text-decoration: underline;
+  font-weight: 600;
+}
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 900px) {
+  .mpp-tiers {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .mpp-tier--featured {
+    transform: none;
+    order: -1;
+  }
+
+  .mpp-tier--featured:hover {
+    transform: translateY(-4px);
+  }
+
+  .mpp-addon {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    padding: 32px 24px;
+  }
+
+  .mpp-trust {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .mpp-pricing {
+    padding: 48px 16px;
+  }
+
+  .mpp-tier {
+    padding: 28px 24px;
+  }
+
+  .mpp-tier__price-amount {
+    font-size: 2.5rem;
+  }
+
+  .mpp-trust {
+    grid-template-columns: 1fr;
+  }
+}
