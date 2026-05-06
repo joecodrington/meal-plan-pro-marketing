@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About — Meal Plan Pro</title>
+<style>
+  :root {
+    --green-primary: #1a8f5a;
+    --green-primary-dark: #15784a;
+    --green-accent: #3da972;
+    --cream: #f4ede4;
+    --white: #ffffff;
+    --ink: #1f1f1f;
+    --ink-soft: #3d3d3d;
+    --grey: #7d7d7d;
+    --grey-light: #b8b3a9;
+    --rule: #e2dccf;
+    --chip-omega: #d6f0e0;
+    --chip-omega-text: #2a7a4d;
+    --chip-tag: #e6e1f5;
+    --chip-tag-text: #5b4d8a;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    line-height: 1.55;
+    font-size: 16px;
+    overflow-x: hidden;
+  }
+
+  header {
+    border-bottom: 1px solid var(--rule);
+    padding: 22px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    backdrop-filter: blur(8px);
+    background: rgba(244, 237, 228, 0.94);
+  }
+
+  .logo {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .logo span { color: var(--green-accent); }
+
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    align-items: center;
+  }
+
+  .nav-links a {
+    color: var(--ink-soft);
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--green-primary); }
+  .nav-links a.active { color: var(--green-primary); }
+
+  .btn-primary {
+    background: var(--green-primary);
+    color: var(--white);
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14.5px;
+    font-weight: 600;
+    transition: background 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border: none;
+    cursor: pointer;
+    line-height: 1.3;
+  }
+
+  .btn-primary:hover { background: var(--green-primary-dark); }
+  .btn-primary.lg { padding: 14px 24px; font-size: 15px; border-radius: 10px; }
+
+  /* HERO */
+  .hero {
+    padding: 80px 48px 64px;
+    max-width: 880px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .section-eyebrow {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--green-primary);
+    letter-spacing: 0.05em;
+    margin-bottom: 16px;
+    text-transform: uppercase;
+  }
+
+  .hero h1 {
+    font-size: clamp(40px, 5.5vw, 64px);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: 24px;
+    color: var(--ink);
+  }
+
+  .hero h1 .accent { color: var(--green-accent); }
+
+  .hero-lede {
+    font-size: 19px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+    max-width: 680px;
+    margin: 0 auto;
+  }
+
+  /* MISSION */
+  .mission {
+    padding: 80px 48px;
+    max-width: 880px;
+    margin: 0 auto;
+  }
+
+  .mission-block {
+    background: var(--white);
+    border: 1px solid var(--rule);
+    border-radius: 12px;
+    padding: 48px;
+  }
+
+  .mission-block h2 {
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    margin-bottom: 20px;
+    color: var(--ink);
+  }
+
+  .mission-block p {
+    font-size: 17px;
+    line-height: 1.65;
+    color: var(--ink-soft);
+    margin-bottom: 16px;
+  }
+
+  .mission-block p:last-child { margin-bottom: 0; }
+
+  .mission-block strong {
+    color: var(--ink);
+    font-weight: 600;
+  }
+
+  /* PRINCIPLES */
+  .principles {
+    padding: 80px 48px;
+    background: var(--white);
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .principles-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .principles h2 {
+    font-size: clamp(32px, 4vw, 44px);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 16px;
+    color: var(--ink);
+  }
+
+  .principles-lede {
+    font-size: 18px;
+    color: var(--ink-soft);
+    margin-bottom: 56px;
+    max-width: 600px;
+  }
+
+  .principles-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+
+  .principle {
+    padding: 32px;
+    border: 1px solid var(--rule);
+    border-radius: 12px;
+    background: var(--cream);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+
+  .principle:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px -10px rgba(31, 31, 31, 0.1);
+  }
+
+  .principle-num {
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--green-primary);
+    color: var(--white);
+    text-align: center;
+    line-height: 32px;
+    font-weight: 700;
+    font-size: 13.5px;
+    margin-bottom: 16px;
+  }
+
+  .principle h3 {
+    font-size: 19px;
+    font-weight: 600;
+    line-height: 1.3;
+    margin-bottom: 10px;
+    color: var(--ink);
+  }
+
+  .principle p {
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--ink-soft);
+  }
+
+  /* HOUSEHOLDS */
+  .households {
+    padding: 80px 48px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .households h2 {
+    font-size: clamp(32px, 4vw, 44px);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 16px;
+    color: var(--ink);
+  }
+
+  .households-lede {
+    font-size: 18px;
+    color: var(--ink-soft);
+    margin-bottom: 48px;
+    max-width: 600px;
+  }
+
+  .household-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .household-card {
+    background: var(--white);
+    border: 1px solid var(--rule);
+    border-radius: 12px;
+    padding: 32px;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+
+  .household-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px -10px rgba(31, 31, 31, 0.1);
+  }
+
+  .household-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--chip-omega);
+    color: var(--chip-omega-text);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 16px;
+    margin-bottom: 20px;
+  }
+
+  .household-card:nth-child(2) .household-icon {
+    background: var(--chip-tag);
+    color: var(--chip-tag-text);
+  }
+
+  .household-card:nth-child(3) .household-icon {
+    background: #fde6cf;
+    color: #9b561e;
+  }
+
+  .household-card h3 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: var(--ink);
+  }
+
+  .household-card p {
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--ink-soft);
+  }
+
+  /* PRACTITIONERS NOTE */
+  .pract {
+    padding: 80px 48px;
+    background: var(--white);
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .pract-inner {
+    max-width: 720px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .pract h2 {
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    margin-bottom: 20px;
+    color: var(--ink);
+  }
+
+  .pract p {
+    font-size: 17px;
+    line-height: 1.65;
+    color: var(--ink-soft);
+  }
+
+  .pract p strong { color: var(--ink); font-weight: 600; }
+
+  /* CTA */
+  .cta {
+    padding: 100px 48px;
+    text-align: center;
+  }
+
+  .cta-inner {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .cta h2 {
+    font-size: clamp(36px, 4.5vw, 56px);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: 20px;
+    color: var(--ink);
+  }
+
+  .cta h2 .accent { color: var(--green-accent); }
+
+  .cta p {
+    font-size: 18px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+    margin-bottom: 32px;
+    max-width: 540px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* FOOTER */
+  footer {
+    padding: 64px 48px 32px;
+    background: var(--cream);
+    border-top: 1px solid var(--rule);
+  }
+
+  .footer-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 48px;
+    margin-bottom: 48px;
+  }
+
+  .footer-brand {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-bottom: 12px;
+  }
+  .footer-brand span { color: var(--green-accent); }
+
+  .footer-tagline {
+    font-size: 15px;
+    color: var(--grey);
+    max-width: 280px;
+    line-height: 1.5;
+  }
+
+  .footer-col h5 {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 16px;
+    letter-spacing: 0.02em;
+  }
+
+  .footer-col a {
+    display: block;
+    color: var(--ink-soft);
+    text-decoration: none;
+    font-size: 14.5px;
+    padding: 5px 0;
+    transition: color 0.2s;
+  }
+
+  .footer-col a:hover { color: var(--green-primary); }
+
+  .footer-bottom {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding-top: 24px;
+    border-top: 1px solid var(--rule);
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    font-size: 13px;
+    color: var(--grey);
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    header { padding: 16px 24px; }
+    .nav-links { gap: 12px; }
+    .nav-links a:not(.btn-primary) { display: none; }
+    .hero { padding: 56px 24px 48px; }
+    .mission { padding: 48px 24px; }
+    .mission-block { padding: 32px; }
+    .principles, .pract { padding: 64px 24px; }
+    .households { padding: 64px 24px; }
+    .principles-grid { grid-template-columns: 1fr; gap: 16px; }
+    .household-cards { grid-template-columns: 1fr; }
+    .cta { padding: 64px 24px; }
+    .footer-inner { grid-template-columns: 1fr 1fr; gap: 32px; }
+  }
+
+  @media (max-width: 500px) {
+    .footer-inner { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <a href="index.html" class="logo">Meal Plan <span>Pro</span></a>
+  <nav class="nav-links">
+    <a href="index.html#problem">Why us</a>
+    <a href="how-it-works.html">How it works</a>
+    <a href="index.html#features">Features</a>
+    <a href="about.html" class="active">About</a>
+    <a href="https://meal-plan-frontend-4tsb.onrender.com" class="btn-primary">Start free</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="section-eyebrow">About</div>
+  <h1>Real food. Real households. <span class="accent">No spreadsheets.</span></h1>
+  <p class="hero-lede">
+    We build meal plans for the way people actually live — with kids who have football practice, partners with their own goals, and Tuesdays where dinner needs to be on the table in fifteen minutes. One household. One plan. Everyone fed.
+  </p>
+</section>
+
+<section class="mission">
+  <div class="mission-block">
+    <h2>Our mission</h2>
+    <p>Most meal planners treat people like <strong>spreadsheets with a stomach</strong>. We don't. We built Meal Plan Pro because the gap between "what should I eat this week?" and actually getting it on the table is wider than any nutrition app has bothered to bridge.</p>
+    <p>Especially when you're feeding a family, training for something, or just trying to stop ordering takeaway on a Wednesday.</p>
+  </div>
+</section>
+
+<section class="principles">
+  <div class="principles-inner">
+    <div class="section-eyebrow">What we believe</div>
+    <h2>Six things we refuse to compromise on.</h2>
+    <p class="principles-lede">These aren't aspirations. They're the rules we hold ourselves to when we ship anything.</p>
+
+    <div class="principles-grid">
+      <div class="principle">
+        <div class="principle-num">1</div>
+        <h3>Plans should match real life.</h3>
+        <p>Tuesday breakfast isn't shakshuka. Friday's a takeaway. Saturday is for proper cooking. We bake the rhythm of a real week into every plan — quick weekday breakfasts, leisurely weekends, lighter days when you're eating out.</p>
+      </div>
+      <div class="principle">
+        <div class="principle-num">2</div>
+        <h3>Households eat together.</h3>
+        <p>Two adults with different goals. Children who can't have what's spicy. School lunches we don't shop for. We plan for the whole table, not just one person at it — with portion scaling, shared meals, and quantities that fill the trolley.</p>
+      </div>
+      <div class="principle">
+        <div class="principle-num">3</div>
+        <h3>Training deserves real fuel.</h3>
+        <p>Carb load on Saturday. Recovery within forty-five minutes. Race-week protocol that respects your gut. If you're training for something, the plan periodises with you — not against you.</p>
+      </div>
+      <div class="principle">
+        <div class="principle-num">4</div>
+        <h3>You stay in charge.</h3>
+        <p>Don't fancy the salmon? Swap it. Hate Wednesday's lunch? Replace it. Nothing locks in until <em>you</em> approve the week. Then — and only then — the shopping list is built around the plan you actually chose.</p>
+      </div>
+      <div class="principle">
+        <div class="principle-num">5</div>
+        <h3>Cost is part of the plan.</h3>
+        <p>Three tiers, real prices, honest totals. Per person, per day, per month. Aisle-ordered shopping. Tappable links straight to your trolley. Because a plan you can't afford is a plan you won't follow.</p>
+      </div>
+      <div class="principle">
+        <div class="principle-num">6</div>
+        <h3>Privacy is non-negotiable.</h3>
+        <p>Your household data lives in EU-region encrypted storage. Your account is yours. We don't sell data, don't run third-party trackers, and don't pretend otherwise.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="households">
+  <div class="section-eyebrow">Who we serve</div>
+  <h2>Built for the household kitchen.</h2>
+  <p class="households-lede">If your week looks like one of these, we've designed for you.</p>
+
+  <div class="household-cards">
+    <div class="household-card">
+      <div class="household-icon">A</div>
+      <h3>The busy household</h3>
+      <p>Two adults, kids in tow, fifteen minutes on a Wednesday. Plans that respect the calendar — quick mornings, school lunches handled, a takeaway built into the budget without blowing the week.</p>
+    </div>
+    <div class="household-card">
+      <div class="household-icon">B</div>
+      <h3>The training partnership</h3>
+      <p>One of you is marathon training. The other isn't. Both of you eat from the same kitchen. We periodise meals independently — your fuel, their balance, one shopping list.</p>
+    </div>
+    <div class="household-card">
+      <div class="household-icon">C</div>
+      <h3>The solo cook</h3>
+      <p>Living alone shouldn't mean living on toast. Right-sized portions, no waste, plans that scale up when guests come over and back down when they leave.</p>
+    </div>
+  </div>
+</section>
+
+<section class="pract">
+  <div class="pract-inner">
+    <div class="section-eyebrow">A note for practitioners</div>
+    <h2>We're built for households, not clinics.</h2>
+    <p>If you're a registered nutritionist or dietitian managing a caseload of clients, you'll want a platform with audit trails, white-labelling, and clinical oversight — and there are excellent ones already out there. We respect that work, and we don't try to replicate it. <strong>Meal Plan Pro is the tool you'd recommend a client use between sessions, or for the partner you're not formally treating.</strong></p>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="cta-inner">
+    <h2>Ready to <span class="accent">stop planning?</span></h2>
+    <p>Two minutes to set up. One click to generate your first week. Approve, swap, shop. Done.</p>
+    <a href="https://meal-plan-frontend-4tsb.onrender.com" class="btn-primary lg">
+      Generate your first plan
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+        <path d="M2 8h12M9 3l5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand">Meal Plan <span>Pro</span></div>
+      <div class="footer-tagline">Plan your week, shop smart, eat well.</div>
+    </div>
+    <div class="footer-col">
+      <h5>Product</h5>
+      <a href="how-it-works.html">How it works</a>
+      <a href="index.html#features">Features</a>
+      
+    </div>
+    <div class="footer-col">
+      <h5>Company</h5>
+      <a href="about.html">About</a>
+      <a href="#">Contact</a>
+    </div>
+    <div class="footer-col">
+      <h5>Legal</h5>
+      <a href="#">Privacy</a>
+      <a href="#">Terms</a>
+      <a href="#">Cookies</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div>© 2026 Meal Plan Pro · Made in the UK</div>
+    <div>v2.0</div>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,1718 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How It Works — Meal Plan Pro</title>
+<style>
+  :root {
+    --green-primary: #1a8f5a;
+    --green-primary-dark: #15784a;
+    --green-accent: #3da972;
+    --cream: #f4ede4;
+    --white: #ffffff;
+    --ink: #1f1f1f;
+    --ink-soft: #3d3d3d;
+    --grey: #7d7d7d;
+    --grey-light: #b8b3a9;
+    --rule: #e2dccf;
+    --chip-protein: #fdf3d4;
+    --chip-protein-text: #8a6d1a;
+    --chip-carbs: #fde6cf;
+    --chip-carbs-text: #9b561e;
+    --chip-fat: #fdd9d9;
+    --chip-fat-text: #9c3e3e;
+    --chip-omega: #d6f0e0;
+    --chip-omega-text: #2a7a4d;
+    --chip-tag: #e6e1f5;
+    --chip-tag-text: #5b4d8a;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    line-height: 1.55;
+    font-size: 16px;
+    overflow-x: hidden;
+  }
+
+  header {
+    border-bottom: 1px solid var(--rule);
+    padding: 22px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    backdrop-filter: blur(8px);
+    background: rgba(244, 237, 228, 0.94);
+  }
+
+  .logo {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .logo span { color: var(--green-accent); }
+
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    align-items: center;
+  }
+
+  .nav-links a {
+    color: var(--ink-soft);
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--green-primary); }
+  .nav-links a.active { color: var(--green-primary); }
+
+  .btn-primary {
+    background: var(--green-primary);
+    color: var(--white);
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14.5px;
+    font-weight: 600;
+    transition: background 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border: none;
+    cursor: pointer;
+    line-height: 1.3;
+  }
+
+  .btn-primary:hover { background: var(--green-primary-dark); }
+  .btn-primary.lg { padding: 14px 24px; font-size: 15px; border-radius: 10px; }
+
+  .btn-secondary {
+    background: var(--white);
+    color: var(--ink);
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14.5px;
+    font-weight: 500;
+    transition: border-color 0.2s, color 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid var(--rule);
+    line-height: 1.3;
+  }
+
+  .btn-secondary:hover {
+    border-color: var(--green-primary);
+    color: var(--green-primary);
+  }
+
+  /* HERO */
+  .hero {
+    padding: 80px 48px 64px;
+    max-width: 1000px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .section-eyebrow {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--green-primary);
+    letter-spacing: 0.05em;
+    margin-bottom: 16px;
+    text-transform: uppercase;
+  }
+
+  .hero h1 {
+    font-size: clamp(40px, 5.5vw, 64px);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: 24px;
+    color: var(--ink);
+  }
+
+  .hero h1 .accent { color: var(--green-accent); }
+
+  .hero-lede {
+    font-size: 19px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+    max-width: 680px;
+    margin: 0 auto 32px;
+  }
+
+  .hero-meta {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    justify-content: center;
+    font-size: 13.5px;
+    color: var(--grey);
+  }
+
+  .hero-meta span { display: inline-flex; align-items: center; gap: 6px; }
+  .hero-meta span::before { content: "✓"; color: var(--green-primary); font-weight: 700; }
+
+  /* TIMELINE NAV */
+  .timeline-nav {
+    position: sticky;
+    top: 78px;
+    z-index: 40;
+    background: rgba(244, 237, 228, 0.95);
+    backdrop-filter: blur(8px);
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    padding: 14px 48px;
+  }
+
+  .timeline-track {
+    max-width: 1280px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .timeline-track::-webkit-scrollbar { display: none; }
+
+  .timeline-step {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: var(--ink-soft);
+    flex-shrink: 0;
+    transition: color 0.2s, opacity 0.3s;
+    opacity: 0.55;
+    font-size: 14px;
+  }
+
+  .timeline-step:hover { color: var(--green-primary); opacity: 1; }
+  .timeline-step.active { opacity: 1; color: var(--green-primary); }
+
+  .timeline-step-num {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--white);
+    border: 1.5px solid currentColor;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .timeline-step.active .timeline-step-num {
+    background: var(--green-primary);
+    color: var(--white);
+    border-color: var(--green-primary);
+  }
+
+  .timeline-step-label {
+    font-weight: 500;
+  }
+
+  .timeline-divider {
+    flex: 1;
+    height: 1px;
+    background: var(--rule);
+    min-width: 12px;
+  }
+
+  /* STAGE */
+  .stage {
+    padding: 100px 48px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .stage:nth-child(odd) {
+    background: var(--white);
+  }
+
+  .stage-inner {
+    max-width: 1180px;
+    margin: 0 auto;
+  }
+
+  .stage-num-display {
+    font-size: 80px;
+    font-weight: 700;
+    line-height: 0.9;
+    letter-spacing: -0.04em;
+    color: var(--green-primary);
+    margin-bottom: 12px;
+    opacity: 0.18;
+  }
+
+  .stage-title {
+    font-size: clamp(36px, 4.5vw, 52px);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: 20px;
+    color: var(--ink);
+    max-width: 800px;
+  }
+
+  .stage-title .accent { color: var(--green-accent); }
+
+  .stage-lede {
+    font-size: 18px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+    max-width: 680px;
+    margin-bottom: 56px;
+  }
+
+  .stage-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 56px;
+    align-items: start;
+  }
+
+  .stage-prose h4 {
+    font-size: 20px;
+    font-weight: 600;
+    margin: 32px 0 12px;
+    color: var(--ink);
+    line-height: 1.3;
+  }
+
+  .stage-prose h4:first-child { margin-top: 0; }
+
+  .stage-prose p {
+    font-size: 16px;
+    line-height: 1.7;
+    margin-bottom: 14px;
+    color: var(--ink-soft);
+  }
+
+  .stage-prose p strong { color: var(--ink); font-weight: 600; }
+
+  .stage-prose ul {
+    list-style: none;
+    margin: 14px 0;
+  }
+
+  .stage-prose ul li {
+    padding: 10px 0 10px 26px;
+    position: relative;
+    font-size: 15.5px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .stage-prose ul li:last-child { border-bottom: none; }
+
+  .stage-prose ul li::before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    color: var(--green-primary);
+    font-weight: 600;
+  }
+
+  /* DEMO PANELS — all match the live app's card style */
+  .demo {
+    background: var(--white);
+    border-radius: 12px;
+    border: 1px solid var(--rule);
+    padding: 28px;
+    box-shadow: 0 8px 24px -12px rgba(31, 31, 31, 0.08);
+  }
+
+  .stage:nth-child(odd) .demo {
+    background: var(--cream);
+  }
+
+  .demo-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--grey);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 18px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  /* Profile demo */
+  .form-row {
+    margin-bottom: 16px;
+  }
+
+  .form-row.split {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 12px;
+  }
+
+  .form-label {
+    display: block;
+    font-size: 13px;
+    color: var(--grey);
+    margin-bottom: 6px;
+  }
+
+  .form-field {
+    background: var(--white);
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    padding: 10px 12px;
+    font-size: 14px;
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  .stage:nth-child(odd) .form-field {
+    background: var(--white);
+  }
+
+  .stage:nth-child(even) .form-field {
+    background: var(--cream);
+  }
+
+  .chip-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .chip-select {
+    padding: 6px 12px;
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+    font-size: 12.5px;
+    color: var(--ink-soft);
+    background: var(--white);
+    font-weight: 500;
+  }
+
+  .stage:nth-child(odd) .chip-select { background: var(--cream); }
+
+  .chip-select.active {
+    background: var(--green-primary);
+    color: var(--white);
+    border-color: var(--green-primary);
+  }
+
+  /* Plan demo */
+  .demo-meal {
+    padding: 12px 0;
+    border-bottom: 1px solid var(--rule);
+    display: grid;
+    grid-template-columns: 70px 1fr auto;
+    gap: 12px;
+    align-items: start;
+    font-size: 13.5px;
+  }
+
+  .demo-meal:last-child { border-bottom: none; padding-bottom: 0; }
+
+  .demo-meal-slot {
+    color: var(--grey);
+    font-size: 13px;
+    padding-top: 1px;
+  }
+
+  .demo-meal-name {
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1.3;
+    margin-bottom: 6px;
+    font-size: 14px;
+  }
+
+  .demo-chips {
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
+  }
+
+  .chip {
+    padding: 2px 9px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 1.4;
+  }
+
+  .chip.protein { background: var(--chip-protein); color: var(--chip-protein-text); }
+  .chip.carbs { background: var(--chip-carbs); color: var(--chip-carbs-text); }
+  .chip.fat { background: var(--chip-fat); color: var(--chip-fat-text); }
+  .chip.omega { background: var(--chip-omega); color: var(--chip-omega-text); }
+  .chip.tag { background: var(--chip-tag); color: var(--chip-tag-text); }
+
+  .demo-meal-kcal {
+    color: var(--grey);
+    white-space: nowrap;
+    font-size: 12.5px;
+  }
+
+  /* Day header in demos */
+  .demo-day-block {
+    margin-bottom: 18px;
+  }
+
+  .demo-day-block:last-child { margin-bottom: 0; }
+
+  .demo-day-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+
+  .demo-day-name {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--ink);
+    text-transform: uppercase;
+  }
+
+  /* Swap demo */
+  .swap-original {
+    background: var(--cream);
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    padding: 14px;
+    margin-bottom: 16px;
+  }
+
+  .stage:nth-child(odd) .swap-original {
+    background: var(--white);
+  }
+
+  .swap-original-name {
+    font-weight: 600;
+    color: var(--ink);
+    text-decoration: line-through;
+    opacity: 0.55;
+    font-size: 14px;
+    margin-bottom: 6px;
+  }
+
+  .swap-link {
+    color: var(--green-primary);
+    font-size: 13px;
+    font-weight: 500;
+  }
+
+  .swap-options-label {
+    font-size: 12px;
+    color: var(--grey);
+    margin-bottom: 10px;
+    font-weight: 500;
+  }
+
+  .swap-option {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 14px;
+    background: var(--cream);
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    margin-bottom: 8px;
+    font-size: 13.5px;
+    cursor: pointer;
+    transition: border-color 0.2s;
+  }
+
+  .stage:nth-child(odd) .swap-option {
+    background: var(--white);
+  }
+
+  .swap-option:hover { border-color: var(--green-primary); }
+
+  .swap-option.selected {
+    background: #d6f0e0;
+    border-color: var(--green-primary);
+  }
+
+  .swap-option-name {
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 2px;
+  }
+
+  .swap-option-meta {
+    font-size: 12px;
+    color: var(--grey);
+  }
+
+  .swap-option-kcal {
+    font-size: 12.5px;
+    color: var(--grey);
+    white-space: nowrap;
+    margin-left: 12px;
+  }
+
+  /* Approve demo */
+  .approve-banner {
+    background: #d6f0e0;
+    border: 1px solid var(--green-accent);
+    border-radius: 10px;
+    padding: 16px 18px;
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+  }
+
+  .approve-banner-text {
+    font-size: 14px;
+    color: var(--ink);
+  }
+
+  .approve-banner-text strong { color: var(--green-primary); font-weight: 700; }
+
+  .approve-btn {
+    background: var(--green-primary);
+    color: var(--white);
+    border: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  .tabs-demo {
+    display: flex;
+    gap: 4px;
+    border-bottom: 2px solid var(--rule);
+    padding-bottom: 0;
+    margin-bottom: 14px;
+  }
+
+  .tab {
+    padding: 10px 14px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--grey);
+    border-bottom: 2px solid transparent;
+    margin-bottom: -2px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .tab.active {
+    color: var(--green-primary);
+    border-bottom-color: var(--green-primary);
+    font-weight: 600;
+  }
+
+  .tab.locked { opacity: 0.45; }
+
+  /* Shopping demo */
+  .shop-aisle {
+    margin-bottom: 14px;
+  }
+
+  .shop-aisle-header {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .shop-aisle-total {
+    color: var(--grey);
+    font-weight: 500;
+    font-size: 13px;
+  }
+
+  .shop-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--rule);
+    font-size: 13.5px;
+  }
+
+  .shop-row:last-child { border-bottom: none; }
+
+  .shop-check {
+    width: 16px;
+    height: 16px;
+    border: 1.5px solid var(--grey-light);
+    border-radius: 4px;
+    flex-shrink: 0;
+    background: var(--white);
+  }
+
+  .shop-check.checked {
+    background: var(--green-primary);
+    border-color: var(--green-primary);
+    position: relative;
+  }
+
+  .shop-check.checked::after {
+    content: "✓";
+    position: absolute;
+    top: -3px;
+    left: 1px;
+    color: white;
+    font-size: 12px;
+    font-weight: 700;
+  }
+
+  .shop-name {
+    flex: 1;
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  .shop-row.checked .shop-name {
+    text-decoration: line-through;
+    color: var(--grey);
+  }
+
+  .shop-qty {
+    font-size: 12px;
+    color: var(--grey);
+    min-width: 30px;
+    text-align: right;
+  }
+
+  .shop-price {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--green-primary);
+    min-width: 50px;
+    text-align: right;
+  }
+
+  .shop-total {
+    margin-top: 16px;
+    padding-top: 14px;
+    border-top: 1.5px solid var(--rule);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .shop-total-label { font-weight: 600; color: var(--ink); font-size: 14px; }
+  .shop-total-value { font-weight: 700; color: var(--green-primary); font-size: 16px; }
+
+  /* Recipe demo */
+  .recipe-card {
+    background: var(--cream);
+    border: 1px solid var(--rule);
+    border-radius: 10px;
+    padding: 18px;
+  }
+
+  .stage:nth-child(odd) .recipe-card {
+    background: var(--white);
+  }
+
+  .recipe-tag {
+    display: inline-block;
+    background: var(--chip-tag);
+    color: var(--chip-tag-text);
+    padding: 3px 10px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 500;
+    margin-bottom: 10px;
+  }
+
+  .recipe-name {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+
+  .recipe-meta {
+    font-size: 12.5px;
+    color: var(--grey);
+    margin-bottom: 16px;
+  }
+
+  .recipe-section {
+    font-size: 11.5px;
+    font-weight: 600;
+    color: var(--green-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 8px;
+  }
+
+  .recipe-list {
+    list-style: none;
+    font-size: 13.5px;
+    line-height: 1.8;
+    color: var(--ink-soft);
+    margin-bottom: 16px;
+  }
+
+  .recipe-method {
+    font-size: 13.5px;
+    line-height: 1.65;
+    color: var(--ink-soft);
+  }
+
+  /* WHY IT WORKS */
+  .why {
+    padding: 100px 48px;
+    background: var(--white);
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .why-inner {
+    max-width: 1180px;
+    margin: 0 auto;
+  }
+
+  .why h2 {
+    font-size: clamp(32px, 4vw, 44px);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 16px;
+    color: var(--ink);
+    max-width: 720px;
+  }
+
+  .why-lede {
+    font-size: 18px;
+    color: var(--ink-soft);
+    margin-bottom: 56px;
+    max-width: 600px;
+  }
+
+  .why-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .why-card {
+    padding: 28px;
+    background: var(--cream);
+    border: 1px solid var(--rule);
+    border-radius: 12px;
+  }
+
+  .why-eyebrow {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--green-primary);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .why-card h3 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--ink);
+    line-height: 1.3;
+  }
+
+  .why-card p {
+    font-size: 14.5px;
+    line-height: 1.6;
+    color: var(--ink-soft);
+  }
+
+  /* TIME ESTIMATE */
+  .time {
+    padding: 80px 48px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .time-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 64px;
+    align-items: center;
+  }
+
+  .time-inner h2 {
+    font-size: clamp(28px, 3.5vw, 40px);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+  }
+
+  .time-inner h2 .accent { color: var(--green-accent); }
+
+  .time-bars {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .time-bar-row {
+    display: grid;
+    grid-template-columns: 180px 1fr 70px;
+    gap: 16px;
+    align-items: center;
+  }
+
+  .time-bar-label {
+    font-size: 14px;
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  .time-bar-track {
+    height: 28px;
+    background: var(--white);
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .time-bar-fill {
+    height: 100%;
+    background: var(--green-primary);
+    border-radius: 6px 0 0 6px;
+    display: flex;
+    align-items: center;
+    padding: 0 12px;
+    font-size: 12px;
+    color: var(--white);
+    font-weight: 500;
+  }
+
+  .time-bar-row:nth-child(2) .time-bar-fill { background: var(--green-accent); }
+  .time-bar-row:nth-child(3) .time-bar-fill { background: var(--chip-tag-text); }
+  .time-bar-row:nth-child(4) .time-bar-fill { background: var(--chip-omega-text); }
+
+  .time-bar-value {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--ink);
+    text-align: right;
+  }
+
+  /* CTA */
+  .cta {
+    padding: 100px 48px;
+    text-align: center;
+    background: var(--white);
+  }
+
+  .cta-inner {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .cta h2 {
+    font-size: clamp(36px, 4.5vw, 56px);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: 20px;
+    color: var(--ink);
+  }
+
+  .cta h2 .accent { color: var(--green-accent); }
+
+  .cta p {
+    font-size: 18px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+    margin-bottom: 32px;
+    max-width: 540px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* FOOTER */
+  footer {
+    padding: 64px 48px 32px;
+    background: var(--cream);
+    border-top: 1px solid var(--rule);
+  }
+
+  .footer-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 48px;
+    margin-bottom: 48px;
+  }
+
+  .footer-brand {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-bottom: 12px;
+  }
+  .footer-brand span { color: var(--green-accent); }
+
+  .footer-tagline {
+    font-size: 15px;
+    color: var(--grey);
+    max-width: 280px;
+    line-height: 1.5;
+  }
+
+  .footer-col h5 {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 16px;
+    letter-spacing: 0.02em;
+  }
+
+  .footer-col a {
+    display: block;
+    color: var(--ink-soft);
+    text-decoration: none;
+    font-size: 14.5px;
+    padding: 5px 0;
+    transition: color 0.2s;
+  }
+
+  .footer-col a:hover { color: var(--green-primary); }
+
+  .footer-bottom {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding-top: 24px;
+    border-top: 1px solid var(--rule);
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    font-size: 13px;
+    color: var(--grey);
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    header { padding: 16px 24px; }
+    .nav-links { gap: 12px; }
+    .nav-links a:not(.btn-primary) { display: none; }
+    .hero { padding: 56px 24px 40px; }
+    .timeline-nav { padding: 12px 24px; top: 70px; }
+    .timeline-step-label { display: none; }
+    .stage { padding: 64px 24px; }
+    .stage-content { grid-template-columns: 1fr; gap: 40px; }
+    .stage-num-display { font-size: 56px; }
+    .why { padding: 64px 24px; }
+    .why-grid { grid-template-columns: 1fr; gap: 16px; }
+    .time { padding: 56px 24px; }
+    .time-inner { grid-template-columns: 1fr; gap: 32px; }
+    .time-bar-row { grid-template-columns: 110px 1fr 50px; gap: 12px; }
+    .time-bar-label { font-size: 12.5px; }
+    .time-bar-value { font-size: 14px; }
+    .cta { padding: 64px 24px; }
+    .footer-inner { grid-template-columns: 1fr 1fr; gap: 32px; }
+    .form-row.split { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 500px) {
+    .footer-inner { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <a href="index.html" class="logo">Meal Plan <span>Pro</span></a>
+  <nav class="nav-links">
+    <a href="index.html#problem">Why us</a>
+    <a href="how-it-works.html" class="active">How it works</a>
+    <a href="index.html#features">Features</a>
+    <a href="about.html">About</a>
+    <a href="https://meal-plan-frontend-4tsb.onrender.com" class="btn-primary">Start free</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="section-eyebrow">How it works</div>
+  <h1>From empty fridge to <span class="accent">full table</span> — in four steps.</h1>
+  <p class="hero-lede">
+    Behind the magic is a real, considered process: a profile that captures your household, a plan that periodises around training and weekends, a swap engine that gives you control, and a shopping list that's actually shoppable.
+  </p>
+  <div class="hero-meta">
+    <span>15 minutes a week</span>
+    <span>3–14 day plans</span>
+    <span>Two-stage approval</span>
+  </div>
+</section>
+
+<div class="timeline-nav">
+  <div class="timeline-track">
+    <a href="#stage-1" class="timeline-step">
+      <span class="timeline-step-num">1</span>
+      <span class="timeline-step-label">Profile</span>
+    </a>
+    <div class="timeline-divider"></div>
+    <a href="#stage-2" class="timeline-step">
+      <span class="timeline-step-num">2</span>
+      <span class="timeline-step-label">Generate</span>
+    </a>
+    <div class="timeline-divider"></div>
+    <a href="#stage-3" class="timeline-step">
+      <span class="timeline-step-num">3</span>
+      <span class="timeline-step-label">Swap</span>
+    </a>
+    <div class="timeline-divider"></div>
+    <a href="#stage-4" class="timeline-step">
+      <span class="timeline-step-num">4</span>
+      <span class="timeline-step-label">Approve</span>
+    </a>
+    <div class="timeline-divider"></div>
+    <a href="#stage-5" class="timeline-step">
+      <span class="timeline-step-num">5</span>
+      <span class="timeline-step-label">Shop</span>
+    </a>
+    <div class="timeline-divider"></div>
+    <a href="#stage-6" class="timeline-step">
+      <span class="timeline-step-num">6</span>
+      <span class="timeline-step-label">Cook</span>
+    </a>
+  </div>
+</div>
+
+<!-- STAGE 01 — PROFILE -->
+<section class="stage" id="stage-1">
+  <div class="stage-inner">
+    <div class="stage-num-display">01</div>
+    <h2 class="stage-title">Tell us about your <span class="accent">kitchen.</span></h2>
+    <p class="stage-lede">Two minutes, once. Save it forever. The richer your profile, the better your plans.</p>
+
+    <div class="stage-content">
+      <div class="stage-prose">
+        <h4>Who's at the table</h4>
+        <p>Start with you — name, age, sex, weight, height, activity level. We calculate your daily calorie target using a clinically validated equation.</p>
+        <p>Add a <strong>second adult</strong> if there's one, with their own stats and their own goals. Up to <strong>six children</strong>, each with an age group that drives portion scaling — a four-year-old gets 45% of an adult portion; a fourteen-year-old gets close to a full one.</p>
+
+        <h4>What you eat (and don't)</h4>
+        <ul>
+          <li>Multi-select health goals — fat loss, muscle gain, energy, recovery, longevity</li>
+          <li>Dietary patterns — omnivore, vegetarian, pescatarian, gluten-free, dairy-free</li>
+          <li>Free-text allergies — typed in your own words</li>
+          <li>Free-text dislikes — "no mushrooms", "tomatoes only cooked", whatever</li>
+          <li>Meals per day — 2, 3, 4, or 5 (your partner can pick differently)</li>
+        </ul>
+
+        <h4>Sport, if you train</h4>
+        <p>Eight sports supported, from long-distance running to CrossFit. Tell us your training days per week, session duration, intensity, and weeks to your event. Your partner can have a totally different sport — or no sport at all. <strong>We periodise each adult independently.</strong></p>
+
+        <h4>Eating-out days</h4>
+        <p>Got a Friday Thai habit? A Saturday roast at the in-laws? Mark those days as eating-out and we'll <strong>reduce the rest of that day's calories by 20–25%</strong>, drop the dinner from the plan, and skip the ingredients in your shopping list.</p>
+      </div>
+
+      <div class="demo">
+        <div class="demo-label">Client profile · Personal details</div>
+
+        <div class="form-row split">
+          <div>
+            <label class="form-label">First name</label>
+            <div class="form-field">Joe</div>
+          </div>
+          <div>
+            <label class="form-label">Last name</label>
+            <div class="form-field">Codrington</div>
+          </div>
+          <div>
+            <label class="form-label">Age</label>
+            <div class="form-field">42</div>
+          </div>
+        </div>
+
+        <div class="form-row split">
+          <div>
+            <label class="form-label">Activity level</label>
+            <div class="form-field">Moderately active</div>
+          </div>
+          <div>
+            <label class="form-label">Weight (kg)</label>
+            <div class="form-field">79</div>
+          </div>
+          <div>
+            <label class="form-label">Target (kg)</label>
+            <div class="form-field">76</div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <label class="form-label">Goals</label>
+          <div class="chip-row">
+            <div class="chip-select active">Fat loss</div>
+            <div class="chip-select active">Energy</div>
+            <div class="chip-select">Muscle gain</div>
+            <div class="chip-select">Longevity</div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <label class="form-label">Allergies &amp; dislikes</label>
+          <div class="form-field">No shellfish · Hates olives · Mushrooms only cooked</div>
+        </div>
+
+        <div class="form-row">
+          <label class="form-label">Sport</label>
+          <div class="form-field">Long distance running · 4 sessions/wk · 12 wks to event</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STAGE 02 — GENERATE -->
+<section class="stage" id="stage-2">
+  <div class="stage-inner">
+    <div class="stage-num-display">02</div>
+    <h2 class="stage-title">A complete plan, generated for <span class="accent">your week.</span></h2>
+    <p class="stage-lede">Click generate. Thirty to sixty seconds later, you've got a complete plan with macros, timing, and periodisation already baked in.</p>
+
+    <div class="stage-content">
+      <div class="stage-prose">
+        <h4>What you get back</h4>
+        <ul>
+          <li>A meal for every slot, every day — breakfast, snacks, lunch, dinner</li>
+          <li>Macros per meal — protein, carbs, fat, calories, omega-3 where relevant</li>
+          <li>Timing badges — pre-workout, post-workout, recovery</li>
+          <li>Day-level tags — training day, rest day, eating out</li>
+          <li>Family-size note explaining how portions scale to your household</li>
+        </ul>
+
+        <h4>The rules baked into every plan</h4>
+        <p><strong>Weekday breakfasts</strong> — under 5 minutes, no cooking. Overnight oats, yogurt parfaits, smoothies, toast. If you've got kids, even simpler.</p>
+        <p><strong>Weekend breakfasts</strong> — leisurely, cooked. Scrambled eggs, pancakes, shakshuka, full English on a Sunday.</p>
+        <p><strong>Training days</strong> — carbs at 5–7g per kg of bodyweight for hard sessions, with a recovery window within 30–45 minutes post-session. Rest days drop to 2–3g/kg.</p>
+        <p><strong>Race week</strong> — if your event is within seven days, the plan switches to one of four carb-loading protocols, factoring in GI sensitivity.</p>
+      </div>
+
+      <div class="demo">
+        <div class="demo-label">Generated plan · 7 days</div>
+
+        <div class="demo-day-block">
+          <div class="demo-day-header">
+            <div class="demo-day-name">Monday</div>
+            <div class="chip tag">Rest day · 1,840 kcal</div>
+          </div>
+
+          <div class="demo-meal">
+            <div class="demo-meal-slot">Breakfast</div>
+            <div>
+              <div class="demo-meal-name">Overnight oats &amp; berries</div>
+              <div class="demo-chips">
+                <div class="chip protein">P 22g</div>
+                <div class="chip carbs">C 48g</div>
+                <div class="chip fat">F 14g</div>
+              </div>
+            </div>
+            <div class="demo-meal-kcal">420 kcal</div>
+          </div>
+
+          <div class="demo-meal">
+            <div class="demo-meal-slot">Lunch</div>
+            <div>
+              <div class="demo-meal-name">Greek chicken bowl</div>
+              <div class="demo-chips">
+                <div class="chip protein">P 38g</div>
+                <div class="chip carbs">C 52g</div>
+                <div class="chip fat">F 16g</div>
+              </div>
+            </div>
+            <div class="demo-meal-kcal">540 kcal</div>
+          </div>
+        </div>
+
+        <div class="demo-day-block">
+          <div class="demo-day-header">
+            <div class="demo-day-name">Tuesday</div>
+            <div class="chip tag">Long run · 2,640 kcal</div>
+          </div>
+
+          <div class="demo-meal">
+            <div class="demo-meal-slot">Breakfast</div>
+            <div>
+              <div class="demo-meal-name">Banana pancakes</div>
+              <div class="demo-chips">
+                <div class="chip protein">P 28g</div>
+                <div class="chip carbs">C 78g</div>
+                <div class="chip fat">F 12g</div>
+                <div class="chip tag">Pre-workout</div>
+              </div>
+            </div>
+            <div class="demo-meal-kcal">580 kcal</div>
+          </div>
+
+          <div class="demo-meal">
+            <div class="demo-meal-slot">Dinner</div>
+            <div>
+              <div class="demo-meal-name">Miso salmon &amp; jasmine rice</div>
+              <div class="demo-chips">
+                <div class="chip protein">P 42g</div>
+                <div class="chip carbs">C 68g</div>
+                <div class="chip fat">F 18g</div>
+                <div class="chip tag">Post-workout</div>
+              </div>
+            </div>
+            <div class="demo-meal-kcal">740 kcal</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STAGE 03 — SWAP -->
+<section class="stage" id="stage-3">
+  <div class="stage-inner">
+    <div class="stage-num-display">03</div>
+    <h2 class="stage-title">Don't fancy something? <span class="accent">Swap it.</span></h2>
+    <p class="stage-lede">Every meal has a swap button. Tap it, get four alternatives, pick one. As many times as you like. Nothing locks in until you say so.</p>
+
+    <div class="stage-content">
+      <div class="stage-prose">
+        <h4>How the swap works</h4>
+        <p>Every meal in your plan has a <strong>"↻ Swap this meal"</strong> link. Tap it and we ask the AI for four alternatives that match the same macros, the same timing slot, and the same household constraints.</p>
+        <p>Within thirty seconds, four alternatives appear. Tap the one you like — it slots straight in. The original is gone, the new meal inherits the same training-day or rest-day context, the same pre-workout timing, the same family-size scaling. <strong>Nothing else in your plan moves.</strong></p>
+
+        <h4>Why this matters</h4>
+        <p>Most meal planners give you one shot. Either you accept the plan or you start over. We let you treat the plan as a draft until you're happy — swap Wednesday's salmon, swap the snack on Saturday, swap the Monday lunch your partner refuses to eat. Then approve.</p>
+
+        <h4>Favourites that learn over time</h4>
+        <ul>
+          <li>Heart icon on every meal — one tap and it's a favourite</li>
+          <li>Favourites saved per profile</li>
+          <li>Future plans bias towards meals you've hearted</li>
+          <li>Swap alternatives also bias towards your favourites</li>
+        </ul>
+      </div>
+
+      <div class="demo">
+        <div class="demo-label">Swap · Wednesday lunch</div>
+
+        <div class="swap-original">
+          <div class="swap-original-name">Tuna &amp; white bean salad</div>
+          <div class="swap-link">↻ Swap this meal</div>
+        </div>
+
+        <div class="swap-options-label">Four alternatives — same macros, same slot</div>
+
+        <div class="swap-option">
+          <div>
+            <div class="swap-option-name">Chicken &amp; quinoa power bowl</div>
+            <div class="swap-option-meta">P 42 · C 58 · F 16</div>
+          </div>
+          <div class="swap-option-kcal">540 kcal</div>
+        </div>
+
+        <div class="swap-option selected">
+          <div>
+            <div class="swap-option-name">Halloumi &amp; lentil salad ✓</div>
+            <div class="swap-option-meta">P 38 · C 54 · F 18 · Selected</div>
+          </div>
+          <div class="swap-option-kcal">560 kcal</div>
+        </div>
+
+        <div class="swap-option">
+          <div>
+            <div class="swap-option-name">Spiced chickpea wrap</div>
+            <div class="swap-option-meta">P 36 · C 60 · F 14</div>
+          </div>
+          <div class="swap-option-kcal">530 kcal</div>
+        </div>
+
+        <div class="swap-option">
+          <div>
+            <div class="swap-option-name">Salmon poke bowl</div>
+            <div class="swap-option-meta">P 44 · C 56 · F 17</div>
+          </div>
+          <div class="swap-option-kcal">555 kcal</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STAGE 04 — APPROVE -->
+<section class="stage" id="stage-4">
+  <div class="stage-inner">
+    <div class="stage-num-display">04</div>
+    <h2 class="stage-title">One click. <span class="accent">Everything unlocks.</span></h2>
+    <p class="stage-lede">Shopping, costs, supplements, nutrient breakdown — all gated until you approve. Because they should reflect the plan you actually want, not the one we suggested.</p>
+
+    <div class="stage-content">
+      <div class="stage-prose">
+        <h4>Why two-stage approval</h4>
+        <p>Generating a shopping list before the plan is finalised wastes everyone's time. If you swap a meal after the list exists, you've now got the wrong ingredients, the wrong cost, and a list that's lying to you.</p>
+        <p>So we lock four tabs — <strong>Shopping, Cost, Nutrients, Supplements</strong> — until you tap approve. Until then, they're greyed out and unclickable. Once approved, all four populate at once, generated from the meals you actually committed to.</p>
+
+        <h4>What happens at the moment of approval</h4>
+        <ul>
+          <li>Shopping list compiled from final meals — no orphan ingredients</li>
+          <li>Aisle-grouped, bracket-stripped, tier-aware retailer links built</li>
+          <li>Cost calculated per category, per person, per day, per month</li>
+          <li>Supplement suggestions generated from any nutrient gaps</li>
+          <li>Approve banner turns green; the plan is now finalised</li>
+        </ul>
+
+        <h4>Can I change my mind?</h4>
+        <p>Yes. Approval isn't permanent. Swap a meal post-approval and the affected tabs simply regenerate. The lock isn't there to trap you — it's there to <strong>stop the wrong shopping list from existing in the first place.</strong></p>
+      </div>
+
+      <div class="demo">
+        <div class="demo-label">Plan ready · 7 days</div>
+
+        <div class="approve-banner">
+          <div class="approve-banner-text">
+            <strong>Plan ready</strong> · 2 swaps made · Ready for review
+          </div>
+          <button class="approve-btn">Approve plan</button>
+        </div>
+
+        <div class="tabs-demo">
+          <div class="tab active">Meal plan</div>
+          <div class="tab locked">Shopping ⚿</div>
+          <div class="tab locked">Cost ⚿</div>
+          <div class="tab locked">Nutrients ⚿</div>
+          <div class="tab locked">Supplements ⚿</div>
+        </div>
+
+        <div style="font-size: 13px; color: var(--grey); line-height: 1.7; padding-top: 6px;">
+          ⚿ Locked until you approve the plan<br>
+          Shopping list reflects your final meal choices<br>
+          Costs reflect your final meal choices<br>
+          Nothing wasted on a draft plan
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STAGE 05 — SHOP -->
+<section class="stage" id="stage-5">
+  <div class="stage-inner">
+    <div class="stage-num-display">05</div>
+    <h2 class="stage-title">An <span class="accent">aisle-by-aisle</span> shopping list.</h2>
+    <p class="stage-lede">Sorted the way you actually shop, priced the way you'll actually pay, tappable straight through to your supermarket.</p>
+
+    <div class="stage-content">
+      <div class="stage-prose">
+        <h4>Sorted by aisle, not alphabet</h4>
+        <p>Items are grouped the way a real supermarket lays itself out: <strong>Produce → Protein → Dairy → Bakery → Grains → Tins → Frozen → Snacks → Sports → Kids.</strong> No more zig-zagging because your list went from "apples" to "yogurt" to "almonds" in alphabetical order.</p>
+
+        <h4>Tier-aware retailer links</h4>
+        <p>Pick a tier — essentials, mid-range, or organic — and every item links to the right Ocado search:</p>
+        <ul>
+          <li><strong>Essentials</strong> — Ocado Own Range, sorted by price ascending</li>
+          <li><strong>Mid-range</strong> — standard search, sorted by price</li>
+          <li><strong>Organic</strong> — "organic" prefix added to every search term</li>
+          <li>Brackets stripped — "spinach (pre-washed)" searches as just "spinach"</li>
+        </ul>
+
+        <h4>Mobile shopping panel</h4>
+        <p>On mobile, a tappable panel slides up from the bottom of the screen. Each item is a tappable link — no popup blockers, no hunting for tiny URLs. Tick items as you add them to the trolley.</p>
+
+        <h4>Honest costs</h4>
+        <p>Every item priced. Per category total at the top of each aisle. Grand total, per-person-per-day, monthly estimate. <strong>Three tiers compared side-by-side</strong> so you can see what trading down (or up) actually costs you.</p>
+      </div>
+
+      <div class="demo">
+        <div class="demo-label">Ocado shopping list · Mid-range</div>
+
+        <div class="shop-aisle">
+          <div class="shop-aisle-header">
+            <span>Produce</span>
+            <span class="shop-aisle-total">~£8.40</span>
+          </div>
+          <div class="shop-row checked">
+            <div class="shop-check checked"></div>
+            <div class="shop-name">Bananas</div>
+            <div class="shop-qty">10</div>
+            <div class="shop-price">£1.50</div>
+          </div>
+          <div class="shop-row checked">
+            <div class="shop-check checked"></div>
+            <div class="shop-name">Mixed berries</div>
+            <div class="shop-qty">1kg</div>
+            <div class="shop-price">£4.50</div>
+          </div>
+          <div class="shop-row">
+            <div class="shop-check"></div>
+            <div class="shop-name">Avocados</div>
+            <div class="shop-qty">5</div>
+            <div class="shop-price">£2.50</div>
+          </div>
+        </div>
+
+        <div class="shop-aisle">
+          <div class="shop-aisle-header">
+            <span>Protein</span>
+            <span class="shop-aisle-total">~£18.70</span>
+          </div>
+          <div class="shop-row">
+            <div class="shop-check"></div>
+            <div class="shop-name">Salmon fillets</div>
+            <div class="shop-qty">4</div>
+            <div class="shop-price">£8.50</div>
+          </div>
+          <div class="shop-row">
+            <div class="shop-check"></div>
+            <div class="shop-name">Chicken breasts</div>
+            <div class="shop-qty">1kg</div>
+            <div class="shop-price">£6.80</div>
+          </div>
+          <div class="shop-row">
+            <div class="shop-check"></div>
+            <div class="shop-name">Halloumi</div>
+            <div class="shop-qty">1</div>
+            <div class="shop-price">£3.40</div>
+          </div>
+        </div>
+
+        <div class="shop-total">
+          <div class="shop-total-label">Week total</div>
+          <div class="shop-total-value">£62.40</div>
+        </div>
+        <div style="display: flex; justify-content: space-between; font-size: 12.5px; color: var(--grey); margin-top: 4px;">
+          <span>Per person/day</span>
+          <span>£4.46</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STAGE 06 — COOK -->
+<section class="stage" id="stage-6">
+  <div class="stage-inner">
+    <div class="stage-num-display">06</div>
+    <h2 class="stage-title">Recipes <span class="accent">on demand.</span></h2>
+    <p class="stage-lede">Click any meal in your plan to expand the full recipe — scaled to your family size, no flicking between apps.</p>
+
+    <div class="stage-content">
+      <div class="stage-prose">
+        <h4>Inline expandable recipes</h4>
+        <p>Every meal has a <strong>"Get recipe &amp; instructions"</strong> link below it. One click expands the recipe inline — ingredients, method, prep time, cook time, all there. Click again to collapse it.</p>
+        <p>Recipes are <strong>scaled to your household</strong> automatically. If you've got two adults and three kids, the quantities reflect that. No mental maths in the middle of cooking.</p>
+
+        <h4>Cached after first load</h4>
+        <p>Once you've fetched a recipe, it stays loaded for the rest of your session. Re-expanding doesn't trigger another AI call — instant.</p>
+
+        <h4>Client view for everyone else in the house</h4>
+        <p>If your partner is the one cooking on Wednesday, they don't need your full dashboard. The <strong>Client view</strong> is a streamlined tab showing the week's meals as a tickable checklist with weekly cost. They tick what they cook, and the state persists.</p>
+
+        <h4>Tracking what actually gets eaten</h4>
+        <p>Tick boxes on every meal. Visual confirmation of what's been cooked. The kind of feedback that makes the next plan smarter — the favourites engine learns from what you cook, not just what you save.</p>
+      </div>
+
+      <div class="demo">
+        <div class="demo-label">Wednesday dinner · Recipe expanded</div>
+
+        <div class="recipe-card">
+          <div class="recipe-tag">Dinner · Post-workout</div>
+          <div class="recipe-name">Miso salmon, jasmine rice &amp; tenderstem</div>
+          <div class="recipe-meta">25 min · serves 4 · 740 kcal/portion</div>
+
+          <div class="recipe-section">Ingredients</div>
+          <ul class="recipe-list">
+            <li>4× salmon fillets (140g each)</li>
+            <li>2 tbsp white miso paste</li>
+            <li>1 tbsp soy sauce</li>
+            <li>320g jasmine rice</li>
+            <li>400g tenderstem broccoli</li>
+            <li>2 cloves garlic, minced</li>
+          </ul>
+
+          <div class="recipe-section">Method</div>
+          <div class="recipe-method">
+            1. Heat oven to 200°C. Whisk miso, soy and a splash of water.<br>
+            2. Brush salmon with glaze, place on lined tray, roast 12 mins.<br>
+            3. Cook rice per packet instructions.<br>
+            4. Steam broccoli 4 mins, toss with garlic and a drizzle of oil.<br>
+            5. Plate salmon over rice with broccoli alongside.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY IT WORKS -->
+<section class="why">
+  <div class="why-inner">
+    <div class="section-eyebrow">Why it works</div>
+    <h2>Six things we care about more than features.</h2>
+    <p class="why-lede">A focused product is the result of clear principles, not a long checklist.</p>
+
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="why-eyebrow">Speed</div>
+        <h3>Plans in under a minute</h3>
+        <p>From clicking generate to a complete plan with macros, timing, periodisation and shopping — typically 30 to 60 seconds.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-eyebrow">Reliability</div>
+        <h3>Plans that arrive whole</h3>
+        <p>No half-finished outputs. No truncated shopping lists. Even a 14-day plan with full breakdowns lands complete every time.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-eyebrow">Privacy</div>
+        <h3>Your household, yours</h3>
+        <p>Encrypted, EU-region hosted, GDPR compliant. We don't sell data, don't run advertising trackers, don't share your information.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-eyebrow">Mobile-first</div>
+        <h3>Works in the supermarket aisle</h3>
+        <p>Built for one-handed use on a phone. Tappable shopping panels, large touch targets, no popup blockers, no fiddly menus.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-eyebrow">Science</div>
+        <h3>Industry-standard calculations</h3>
+        <p>Calorie targets use clinically validated equations, then adjust for activity and periodisation — independently for each adult.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-eyebrow">Honesty</div>
+        <h3>Real prices, real aisles</h3>
+        <p>Shopping lists sorted by genuine supermarket aisle layout. Prices reflect current UK estimates across three tiers. No tricks.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TIME ESTIMATE -->
+<section class="time">
+  <div class="time-inner">
+    <div>
+      <div class="section-eyebrow">Time it takes</div>
+      <h2>Fifteen minutes a week. <span class="accent">Genuinely.</span></h2>
+    </div>
+    <div class="time-bars">
+      <div class="time-bar-row">
+        <div class="time-bar-label">First-time profile</div>
+        <div class="time-bar-track">
+          <div class="time-bar-fill" style="width: 45%;">Once, then saved</div>
+        </div>
+        <div class="time-bar-value">2 min</div>
+      </div>
+      <div class="time-bar-row">
+        <div class="time-bar-label">Generate plan</div>
+        <div class="time-bar-track">
+          <div class="time-bar-fill" style="width: 18%;">AI does it</div>
+        </div>
+        <div class="time-bar-value">45 sec</div>
+      </div>
+      <div class="time-bar-row">
+        <div class="time-bar-label">Review &amp; swap</div>
+        <div class="time-bar-track">
+          <div class="time-bar-fill" style="width: 70%;">Your call</div>
+        </div>
+        <div class="time-bar-value">8 min</div>
+      </div>
+      <div class="time-bar-row">
+        <div class="time-bar-label">Approve &amp; order</div>
+        <div class="time-bar-track">
+          <div class="time-bar-fill" style="width: 35%;">Tap to Ocado</div>
+        </div>
+        <div class="time-bar-value">4 min</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta" id="cta">
+  <div class="cta-inner">
+    <h2>Now you know. <span class="accent">Try it.</span></h2>
+    <p>Two minutes to set up. One click to generate your first week. The whole process you just read about — yours, free, no card required.</p>
+    <a href="https://meal-plan-frontend-4tsb.onrender.com" class="btn-primary lg">
+      Generate your first plan
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+        <path d="M2 8h12M9 3l5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand">Meal Plan <span>Pro</span></div>
+      <div class="footer-tagline">Plan your week, shop smart, eat well.</div>
+    </div>
+    <div class="footer-col">
+      <h5>Product</h5>
+      <a href="how-it-works.html">How it works</a>
+      <a href="index.html#features">Features</a>
+      
+    </div>
+    <div class="footer-col">
+      <h5>Company</h5>
+      <a href="about.html">About</a>
+      <a href="#">Contact</a>
+    </div>
+    <div class="footer-col">
+      <h5>Legal</h5>
+      <a href="#">Privacy</a>
+      <a href="#">Terms</a>
+      <a href="#">Cookies</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div>© 2026 Meal Plan Pro · Made in the UK</div>
+    <div>v2.0</div>
+  </div>
+</footer>
+
+<script>
+  const stages = document.querySelectorAll('.stage');
+  const steps = document.querySelectorAll('.timeline-step');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.id;
+        steps.forEach(step => {
+          step.classList.toggle('active', step.getAttribute('href') === '#' + id);
+        });
+      }
+    });
+  }, { rootMargin: '-30% 0px -60% 0px' });
+
+  stages.forEach(stage => observer.observe(stage));
+</script>
+
+</body>
+</html>
